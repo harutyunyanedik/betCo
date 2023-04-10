@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_home_general"
+    app:startDestination="@id/fakeStartFragment">
+
+    <fragment
+        android:id="@+id/fakeStartFragment"
+        android:name="am.mil.presentationapp.base.fragment.FakeFragment"
+        android:label="" />
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="am.mil.presentationapp.home.HomeMainTabFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home_main_tab" />
+
+    <action
+        android:id="@+id/action_global_homeFragment"
+        app:destination="@id/homeFragment" />
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="am.mil.presentationapp.history.HistoryMainTabFragment"
+        android:label="HistoryFragment"
+        tools:layout="@layout/fragment_history_main_tab" />
+
+    <action
+        android:id="@+id/action_global_prematchFragment"
+        app:destination="@id/historyFragment" />
+
+    <fragment
+        android:id="@+id/scannerFragment"
+        android:name="am.mil.presentationapp.qrcode.QrCodeMainTabFragment"
+        android:label="ScannerFragment"
+        tools:layout="@layout/fragment_qr_code_main_tab" />
+
+    <action
+        android:id="@+id/action_global_scannerFragment"
+        app:destination="@id/scannerFragment" />
+
+    <fragment
+        android:id="@+id/cardsFragment"
+        android:name="am.mil.presentationapp.cards.CardsMainTabFragment"
+        android:label="CardsFragment"
+        tools:layout="@layout/fragment_cards_main_tab" />
+
+    <action
+        android:id="@+id/action_global_cardsFragment"
+        app:destination="@id/cardsFragment" />
+
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="am.mil.presentationapp.account.AccountMainTabFragment"
+        android:label="AccountFragment"
+        tools:layout="@layout/fragment_account_main_tab" />
+
+    <action
+        android:id="@+id/action_global_accountFragment"
+        app:destination="@id/accountFragment" />
+
+</navigation>

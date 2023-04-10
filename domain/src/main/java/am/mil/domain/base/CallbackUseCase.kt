@@ -4,12 +4,12 @@ import android.content.Context
 import android.util.Log
 import androidx.annotation.Keep
 import kotlinx.coroutines.*
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import retrofit2.Response
 import kotlin.coroutines.CoroutineContext
 
-abstract class CallbackUseCase<P, R>(private val coroutineDispatcher: CoroutineDispatcher) : KoinComponent {
+abstract class CallbackUseCase<P, R>(private val coroutineDispatcher: CoroutineDispatcher): KoinComponent {
 
     private val context: Context by inject()
 

@@ -1,3 +1,20 @@
 <resources>
-    <string name="app_name">PresentationApp</string>
+    <string name="app_name">Wallet Application</string>
+
+    <string name="navigationMenu_home">Home</string>
+    <string name="navigationMenu_history">History</string>
+    <string name="navigationMenu_scanner">Qr Code</string>
+    <string name="navigationMenu_cards">Cards</string>
+    <string name="navigationMenu_account">Account</string>
+
+    <integer-array name="navigationMenu_titles_ResIds_Array">
+        <item name="navigationMenu_home">@string/navigationMenu_home</item>
+        <item name="navigationMenu_history">@string/navigationMenu_history</item>
+        <item name="navigationMenu_scanner">@string/navigationMenu_scanner</item>
+        <item name="navigationMenu_cards">@string/navigationMenu_cards</item>
+        <item name="navigationMenu_account">@string/navigationMenu_account</item>
+    </integer-array>
+
+    <string name="InDevPage_inn_development">In development</string>
+
 </resources>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        tools:context=".home.HomeActivity">
+
+        <TextView
+            android:id="@+id/noConnectionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:background="@android:color/holo_red_dark"
+            android:clickable="false"
+            android:focusable="false"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="No connection"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText"
+            tools:text="No Connection" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host_container"
+            android:name="am.mil.presentationapp.base.DispatchInsetsNavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_above="@id/bottomNavigationView"
+            android:layout_marginBottom="1dp"
+            android:tag="home_host_fragment"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+            app:layout_constraintTop_toBottomOf="@+id/noConnectionTextView" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/home_activity_bottom_navigation_background_color"
+            android:elevation="0dp"
+            android:outlineAmbientShadowColor="@android:color/transparent"
+            android:outlineSpotShadowColor="@android:color/transparent"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+            app:elevation="0dp"
+            app:itemIconTint="@color/selector_color_bottom_bar"
+            app:itemTextColor="@color/selector_color_bottom_bar"
+            app:labelVisibilityMode="labeled"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:menu="@menu/menu_home_bottom_navigation_bar"
+            tools:ignore="UnusedAttribute" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

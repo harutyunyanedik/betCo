@@ -7,4 +7,20 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="home_activity_bottom_navigation_background_color">@android:color/holo_green_dark</color>
+
+
+    <color name="color_1">#fff</color>
+    <color name="color_1_90">#E6FFFFFF</color>
+    <color name="color_1_80">#CCFFFFFF</color>
+    <color name="color_1_70">#B3FFFFFF</color>
+    <color name="color_1_60">#99FFFFFF</color>
+    <color name="color_1_50">#80FFFFFF</color>
+    <color name="color_1_40">#66FFFFFF</color>
+
+    <color name="status_bar_color">@color/color_1</color>
+
+
+
 </resources>

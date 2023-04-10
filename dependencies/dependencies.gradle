@@ -1,0 +1,100 @@
+ext {
+
+    versionOfName = '1.0'
+    versionOfCode = 1
+
+    versionOfCompileSdk = 33
+    versionOfMinSdk = 21
+    versionOfTargetSdk = 33
+    versionOfBuildTools = '30.0.3'
+
+    versions = [
+            "kotlinVersion"             : '1.7.21',
+            "coreVersion"               : '1.9.0',
+            "navigationVersion"         : '2.5.3',
+            "androidGradlePluginVersion": '7.2.2',
+
+            //UI
+            "appCompatVersion"          : '1.5.1',
+            "activityVersion"           : '1.6.1',
+            "fragmentVersion"           : '1.5.5',
+            "materialVersion"           : '1.7.0',
+            "constraintLayoutVersion"   : '2.1.4',
+            "cardviewVersion"           : '1.0.0',
+            //Legacy Support
+            "legacySupportVersion"      : '1.0.0',
+            // Architecture Components
+            "lifecycleVersion"          : '2.5.1',
+            "lifecycleExtensionVersion" : '2.2.0',
+            // Koin
+            "koinVersion"               : '3.3.0',
+            // Network
+            "retrofitVersion"           : '2.9.0',
+            "okhttpVersion"             : '4.9.3',
+            //Glide
+            "glideVersion"              : '4.11.0',
+            //CustomTabs
+            "browserVersion"            : '1.4.0',
+    ]
+
+    classpathDependencies = [
+            gradle                        : "com.android.tools.build:gradle:${versions.androidGradlePluginVersion}",
+            kotlinGradlePlugin            : "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlinVersion}",
+            navigationSafeArgsGradlePlugin: "androidx.navigation:navigation-safe-args-gradle-plugin:${versions.navigationVersion}"
+    ]
+
+    uiDependencies = [
+            appcompat       : "androidx.appcompat:appcompat:${versions.appCompatVersion}",
+            activityKtx     : "androidx.activity:activity-ktx:${versions.activityVersion}",
+            fragmentKtx     : "androidx.fragment:fragment-ktx:${versions.fragmentVersion}",
+            material        : "com.google.android.material:material:${versions.materialVersion}",
+            constraintLayout: "androidx.constraintlayout:constraintlayout:${versions.constraintLayoutVersion}",
+            cardview        : "androidx.cardview:cardview:${versions.cardviewVersion}",
+            browser         : "androidx.browser:browser:${versions.browserVersion}"
+    ]
+
+    legacySupportDependencies = [
+            legacySupport: "androidx.legacy:legacy-support-v4:${versions.legacySupportVersion}"
+    ]
+
+    kotlinDependencies = [
+            kotlinStdlibJdk7: "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlinVersion}",
+            coreKtx         : "androidx.core:core-ktx:${versions.coreVersion}",
+            reflection      : "org.jetbrains.kotlin:kotlin-reflect:${versions.kotlinVersion}"
+    ]
+
+    koinDependencies = [
+            koinCore             : "io.insert-koin:koin-android:${versions.koinVersion}",
+            koinCompat           : "io.insert-koin:koin-android-compat:${versions.koinVersion}",
+            koinWorkmanager      : "io.insert-koin:koin-androidx-workmanager:${versions.koinVersion}",
+            koinNavigation       : "io.insert-koin:koin-androidx-navigation:${versions.koinVersion}",
+    ]
+
+    networkingDependencies = [
+            retrofit             : "com.squareup.retrofit2:retrofit:${versions.retrofitVersion}",
+            retrofitGsonConverter: "com.squareup.retrofit2:converter-gson:${versions.retrofitVersion}",
+            retrofitRxJavaAdapter: "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofitVersion}",
+            okHttp3              : "com.squareup.okhttp3:okhttp:${versions.okhttpVersion}",
+            okHttp3Logging       : "com.squareup.okhttp3:logging-interceptor:${versions.okhttpVersion}"
+    ]
+
+    architectureComponentsDependencies = [
+            lifecycleExtensions  : "androidx.lifecycle:lifecycle-extensions:${versions.lifecycleExtensionVersion}",
+            lifecycleLivedata    : "androidx.lifecycle:lifecycle-livedata-ktx:${versions.lifecycleVersion}",
+            lifecycleViewmodelKtx: "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycleVersion}"
+    ]
+
+    navigationComponentsDependencies = [
+            navigationFragmentKtx: "androidx.navigation:navigation-fragment-ktx:${versions.navigationVersion}",
+            navigationUiKtx      : "androidx.navigation:navigation-ui-ktx:${versions.navigationVersion}"
+    ]
+
+    glideDependencies = [
+            glide: "com.github.bumptech.glide:glide:${versions.glideVersion}"
+    ]
+
+    annotationProcessorDependencies = [
+            lifecycleCompilerKapt: "androidx.lifecycle:lifecycle-compiler:${versions.lifecycleVersion}",
+            glideKapt            : "com.github.bumptech.glide:compiler:${versions.glideVersion}"
+    ]
+}

@@ -7,8 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="myAccentColor">#99A71F</color>
+    <color name="myWindowBackground">#1A000000</color>
 
-    <color name="home_activity_bottom_navigation_background_color">@android:color/holo_green_dark</color>
+    <color name="home_activity_bottom_navigation_background_color">@color/toolbar_color</color>
 
 
     <color name="color_1">#fff</color>
@@ -18,9 +20,19 @@
     <color name="color_1_60">#99FFFFFF</color>
     <color name="color_1_50">#80FFFFFF</color>
     <color name="color_1_40">#66FFFFFF</color>
+    <color name="color_1_30">#4DFFFFFF</color>
+    <color name="color_1_20">#33FFFFFF</color>
+    <color name="color_1_10">#1AFFFFFF</color>
 
-    <color name="status_bar_color">@color/color_1</color>
+    <color name="status_bar_color">@color/toolbar_color</color>
+    <color name="toolbar_color">#FF5722</color>
 
-
+    <color name="wallet_MaterialDialogColorSurface">@color/myWindowBackground</color>
+    <color name="wallet_MaterialDialogAccentColor">@color/myAccentColor</color>
+    <color name="wallet_MaterialDialogColorOnSurface">@color/myWindowBackground</color>
+    <color name="wallet_MaterialDialogTitleTextColor">@color/color_1</color>
+    <color name="wallet_MaterialDialogDescriptionTextColor">@color/color_1_60</color>
+    <color name="wallet_MaterialDialogAgreeButtonTextColor">@color/myAccentColor</color>
+    <color name="wallet_MaterialDialogCancelButtonTextColor">@color/myAccentColor</color>
 
 </resources>

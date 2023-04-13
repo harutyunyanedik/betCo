@@ -7,7 +7,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/inDevFragment"
-        android:name="am.mil.presentationapp.indev.InDevFragment"
+        android:name="am.mil.walletapplication.indev.InDevFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

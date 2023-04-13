@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/fakeStartFragment"
-        android:name="am.mil.presentationapp.base.fragment.FakeFragment"
+        android:name="am.mil.walletapplication.base.fragment.FakeFragment"
         android:label="" />
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="am.mil.presentationapp.home.HomeMainTabFragment"
+        android:name="am.mil.walletapplication.home.HomeMainTabFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home_main_tab" />
 
@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/historyFragment"
-        android:name="am.mil.presentationapp.history.HistoryMainTabFragment"
+        android:name="am.mil.walletapplication.history.HistoryMainTabFragment"
         android:label="HistoryFragment"
         tools:layout="@layout/fragment_history_main_tab" />
 
@@ -32,7 +32,7 @@
 
     <fragment
         android:id="@+id/scannerFragment"
-        android:name="am.mil.presentationapp.qrcode.QrCodeMainTabFragment"
+        android:name="am.mil.walletapplication.qrcode.QrCodeMainTabFragment"
         android:label="ScannerFragment"
         tools:layout="@layout/fragment_qr_code_main_tab" />
 
@@ -42,7 +42,7 @@
 
     <fragment
         android:id="@+id/cardsFragment"
-        android:name="am.mil.presentationapp.cards.CardsMainTabFragment"
+        android:name="am.mil.walletapplication.cards.CardsMainTabFragment"
         android:label="CardsFragment"
         tools:layout="@layout/fragment_cards_main_tab" />
 
@@ -52,7 +52,7 @@
 
     <fragment
         android:id="@+id/accountFragment"
-        android:name="am.mil.presentationapp.account.AccountMainTabFragment"
+        android:name="am.mil.walletapplication.account.AccountMainTabFragment"
         android:label="AccountFragment"
         tools:layout="@layout/fragment_account_main_tab" />
 

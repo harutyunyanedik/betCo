@@ -16,5 +16,7 @@
     </integer-array>
 
     <string name="InDevPage_inn_development">In development</string>
+    <string name="wallet_global_text_copied">Copied</string>
+
 
 </resources>

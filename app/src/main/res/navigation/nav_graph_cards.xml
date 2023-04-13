@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/cardsFakeFragment"
-        android:name="am.mil.presentationapp.base.fragment.FakeFragment"
+        android:name="am.mil.walletapplication.base.fragment.FakeFragment"
         android:label="" />
 
 </navigation>

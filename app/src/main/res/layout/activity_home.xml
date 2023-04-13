@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
+        android:background="@color/myWindowBackground"
         tools:context=".home.HomeActivity">
 
         <TextView
@@ -28,7 +28,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_container"
-            android:name="am.mil.presentationapp.base.DispatchInsetsNavHostFragment"
+            android:name="am.mil.walletapplication.base.fragment.DispatchInsetsNavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_above="@id/bottomNavigationView"

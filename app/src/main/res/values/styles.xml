@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BaseMaterialAlertDialogStyle" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="colorSurface">@color/wallet_MaterialDialogColorSurface</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialogTitleTextStyle</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/MaterialAlertDialogBodyTextStyle</item>
+        <item name="buttonBarPositiveButtonStyle">@style/MaterialAlertDialogPositiveButtonStyle</item>
+        <item name="buttonBarNegativeButtonStyle">@style/MaterialAlertDialogNegativeButtonStyle</item>
+        <item name="colorAccent">@color/wallet_MaterialDialogAccentColor</item>
+        <item name="colorOnSurface">@color/wallet_MaterialDialogColorOnSurface</item>
+    </style>
+
+    <style name="MaterialAlertDialogTitleTextStyle" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <!--        <item name="android:textSize">@dimen/betCoCommonMaterialDialogTitleTextSize</item>-->
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/wallet_MaterialDialogTitleTextColor</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:lineSpacingExtra">0sp</item>
+    </style>
+
+    <style name="MaterialAlertDialogBodyTextStyle" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+        <!--        <item name="android:textSize">@dimen/betCoCommonMaterialDialogDescriptionTextSize</item>-->
+        <item name="android:textColor">@color/wallet_MaterialDialogDescriptionTextColor</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textAlignment">viewStart</item>
+    </style>
+
+    <style name="MaterialAlertDialogPositiveButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/wallet_MaterialDialogAgreeButtonTextColor</item>
+    </style>
+
+    <style name="MaterialAlertDialogNegativeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/wallet_MaterialDialogCancelButtonTextColor</item>
+    </style>
+
+</resources>

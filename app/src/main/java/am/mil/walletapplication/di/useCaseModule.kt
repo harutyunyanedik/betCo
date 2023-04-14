@@ -1,11 +1,11 @@
 package am.mil.walletapplication.di
 
-import am.mil.domain.menu.usecase.GetMenuItemsUseCase
+import am.mil.domain.category.usecase.GetCategoriesUseCase
 import org.koin.dsl.module
 
 val useCaseModule = module {
 
     factory {
-        GetMenuItemsUseCase(get(), get())
+        GetCategoriesUseCase(get(), get())
     }
 }

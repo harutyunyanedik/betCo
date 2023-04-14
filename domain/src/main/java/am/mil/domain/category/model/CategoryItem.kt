@@ -1,10 +1,10 @@
-package am.mil.domain.menu.model
+package am.mil.domain.category.model
 
 import java.io.Serializable
 
-data class MenuItem(
+data class CategoryItem(
     var id: Long? = null,
-    var childMenuItems: List<MenuItem>? = null,
+    var childCategoryItems: List<CategoryItem>? = null,
     var svg: String? = null,
     var name: String? = null,
     var titleColor: String? = null,

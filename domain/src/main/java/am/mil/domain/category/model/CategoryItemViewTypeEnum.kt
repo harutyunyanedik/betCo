@@ -1,4 +1,4 @@
-package am.mil.domain.menu.model
+package am.mil.domain.category.model
 
 enum class CategoryItemViewTypeEnum(val type: Int) {
     GRID(0),

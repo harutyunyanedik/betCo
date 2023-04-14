@@ -1,7 +1,7 @@
 package am.mil.walletapplication.category
 
-import am.mil.domain.menu.model.CategoryItemViewTypeEnum.GRID
-import am.mil.domain.menu.model.CategoryItemViewTypeEnum.LINEAR
+import am.mil.domain.category.model.CategoryItemViewTypeEnum.GRID
+import am.mil.domain.category.model.CategoryItemViewTypeEnum.LINEAR
 import am.mil.walletapplication.R
 import am.mil.walletapplication.base.fragment.BaseWalletFragment
 import am.mil.walletapplication.base.utils.WalletPreferencesManager
@@ -24,7 +24,7 @@ class CategoryFragment : BaseWalletFragment() {
     private var binding: FragmentCategoryBinding by viewLifecycle()
     private val navArgs: CategoryFragmentArgs by navArgs()
     private val categoryAdapter: CategoryAdapter = CategoryAdapter {
-        if (!it.childMenuItems.isNullOrEmpty())
+        if (!it.childCategoryItems.isNullOrEmpty())
             findNavController().navigate(CategoryFragmentDirections.actionGlobalCategoryFragment(it))
     }
 
@@ -50,7 +50,9 @@ class CategoryFragment : BaseWalletFragment() {
         binding.balanceTextView.transformationMethod = if (WalletPreferencesManager.isShowBalance()) null else PasswordTransformationMethod()
         val imageResId = if (WalletPreferencesManager.isShowBalance()) R.drawable.ic_password_hide else R.drawable.ic_password_show
         binding.showHidePasswordImageView.setImageDrawable(ContextCompat.getDrawable(requireContext(), imageResId))
-        categoryAdapter.updateData(navArgs.menuItem.childMenuItems?.toMutableList())
+        val filterImageResId = if (WalletPreferencesManager.getCategoryItemViewType() == GRID) R.drawable.ic_list_vertical else R.drawable.ic_square_grid
+        binding.filterImageView.setImageDrawable(ContextCompat.getDrawable(requireContext(), filterImageResId))
+        categoryAdapter.updateData(navArgs.category.childCategoryItems?.toMutableList())
     }
 
     @SuppressLint("NotifyDataSetChanged")

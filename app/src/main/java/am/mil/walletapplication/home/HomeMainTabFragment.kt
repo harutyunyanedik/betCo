@@ -22,7 +22,7 @@ class HomeMainTabFragment : BaseWalletFragment() {
     private var binding: FragmentHomeMainTabBinding by viewLifecycle()
     private val viewModel by viewModel<HomeMainTabViewModel>()
     private val categoryAdapter: CategoryAdapter = CategoryAdapter {
-        if (!it.childMenuItems.isNullOrEmpty())
+        if (!it.childCategoryItems.isNullOrEmpty())
             findNavController().navigate(HomeMainTabFragmentDirections.actionGlobalCategoryFragment(it))
     }
     private val promotionAdapter: HomePromotionAdapter = HomePromotionAdapter {
@@ -32,7 +32,7 @@ class HomeMainTabFragment : BaseWalletFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         addLoader()
-        viewModel.getMenuItems()
+        viewModel.getCategories()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -71,7 +71,7 @@ class HomeMainTabFragment : BaseWalletFragment() {
     }
 
     private fun setupObservers() {
-        viewModel.menuItemsLiveData.observe(viewLifecycleOwner) {
+        viewModel.categoryItemsLiveData.observe(viewLifecycleOwner) {
             removeLoader()
             categoryAdapter.updateData(it.toMutableList())
         }

@@ -1,7 +1,7 @@
 package am.mil.walletapplication.category
 
-import am.mil.domain.menu.model.CategoryItemViewTypeEnum
-import am.mil.domain.menu.model.MenuItem
+import am.mil.domain.category.model.CategoryItemViewTypeEnum
+import am.mil.domain.category.model.CategoryItem
 import am.mil.walletapplication.base.utils.VectorDrawableCreator
 import am.mil.walletapplication.databinding.ItemCategoryGridBinding
 import am.mil.walletapplication.databinding.ItemCategoryLinearBinding
@@ -16,9 +16,9 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 
-class CategoryAdapter(var itemViewType: CategoryItemViewTypeEnum = CategoryItemViewTypeEnum.GRID, private val itemClick: (MenuItem) -> Unit) : RecyclerView.Adapter<CategoryAdapter.BaseViewHolder>() {
+class CategoryAdapter(var itemViewType: CategoryItemViewTypeEnum = CategoryItemViewTypeEnum.GRID, private val itemClick: (CategoryItem) -> Unit) : RecyclerView.Adapter<CategoryAdapter.BaseViewHolder>() {
 
-    private val items: MutableList<MenuItem> = mutableListOf()
+    private val items: MutableList<CategoryItem> = mutableListOf()
     private lateinit var context: Context
     private lateinit var layoutInflater: LayoutInflater
 
@@ -31,7 +31,7 @@ class CategoryAdapter(var itemViewType: CategoryItemViewTypeEnum = CategoryItemV
     override fun getItemViewType(position: Int): Int = itemViewType.type
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateData(items: MutableList<MenuItem>?) {
+    fun updateData(items: MutableList<CategoryItem>?) {
         this.items.clear()
         items?.let { this.items.addAll(items) }
         notifyDataSetChanged()
@@ -59,7 +59,7 @@ class CategoryAdapter(var itemViewType: CategoryItemViewTypeEnum = CategoryItemV
         abstract val categoryImage: ImageView
         abstract val categoryTitle: TextView
 
-        open fun bind(item: MenuItem) {
+        open fun bind(item: CategoryItem) {
             item.svg?.let {
                 val d = VectorDrawableCreator.getVectorDrawable(context, 24, 24, listOf(VectorDrawableCreator.PathData(it, Color.parseColor(item.iconTint))))
                 categoryImage.background = d

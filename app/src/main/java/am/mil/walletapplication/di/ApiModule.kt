@@ -2,14 +2,14 @@ package am.mil.walletapplication.di
 
 import am.mil.data.base.createOkHttpClient
 import am.mil.data.base.createWebService
-import am.mil.data.menu.repo.MenuItemRepoImpl
-import am.mil.data.net.WalletDataSource
-import am.mil.domain.menu.repo.MenuItemRepo
+import am.mil.data.net.categories.CategoriesSharedRepoImpl
+import am.mil.data.net.categories.CategoriesDataSource
+import am.mil.domain.category.repo.CategoriesSharedRepo
 import org.koin.dsl.module
 
 internal val apiModule = module {
 
-    single { createWebService<WalletDataSource>(createOkHttpClient(), "https://dev-workflow-elements-api.azurewebsites.net/") }
+    single { createWebService<CategoriesDataSource>(createOkHttpClient(), "https://dev-workflow-elements-api.azurewebsites.net/") }
 
-    single<MenuItemRepo> { MenuItemRepoImpl(get()) }
+    single<CategoriesSharedRepo> { CategoriesSharedRepoImpl(get()) }
 }

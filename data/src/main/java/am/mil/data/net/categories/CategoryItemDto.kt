@@ -1,9 +1,9 @@
-package am.mil.data.menu.dto
+package am.mil.data.net.categories
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-data class MenuItemDto(
+data class CategoryItemDto(
     @SerializedName("id")
     val id: Long? = null,
     @SerializedName("name")
@@ -13,7 +13,7 @@ data class MenuItemDto(
     @SerializedName("parentNodeId")
     val parentNodeId: Any? = null,
     @SerializedName("menuItems")
-    val childMenuItems: List<MenuItemDto>? = null,
+    val childCategoryItems: List<CategoryItemDto>? = null,
     @SerializedName("svg")
     val svg: String? = null,
     @SerializedName("textColor")

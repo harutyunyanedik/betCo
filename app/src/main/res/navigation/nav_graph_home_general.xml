@@ -67,8 +67,8 @@
         tools:layout="@layout/fragment_category" >
 
         <argument
-            android:name="menuItem"
-            app:argType="am.mil.domain.menu.model.MenuItem" />
+            android:name="category"
+            app:argType="am.mil.domain.category.model.CategoryItem" />
 
     </fragment>
 

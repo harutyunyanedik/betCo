@@ -1,6 +1,6 @@
 package am.mil.walletapplication.base.utils
 
-import am.mil.domain.menu.model.CategoryItemViewTypeEnum
+import am.mil.domain.category.model.CategoryItemViewTypeEnum
 
 object WalletPreferencesManager {
 

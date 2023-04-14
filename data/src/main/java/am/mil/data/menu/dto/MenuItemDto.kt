@@ -12,6 +12,12 @@ data class MenuItemDto(
     val parentId: Any? = null,
     @SerializedName("parentNodeId")
     val parentNodeId: Any? = null,
+    @SerializedName("menuItems")
+    val childMenuItems: List<MenuItemDto>? = null,
     @SerializedName("svg")
-    val svg: String? = null
+    val svg: String? = null,
+    @SerializedName("textColor")
+    val textColor: String? = null,
+    @SerializedName("iconColor")
+    val iconColor: String? = null
 ) : Serializable

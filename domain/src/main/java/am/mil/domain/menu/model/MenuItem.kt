@@ -1,10 +1,12 @@
 package am.mil.domain.menu.model
 
+import java.io.Serializable
+
 data class MenuItem(
-    val id: Long?,
-    val menuItems: List<MenuItem>? = null,
-    val svg: String? = null,
-    val name: String? = null,
-    val parentId: Any? = null,
-    val parentNodeId: Any? = null,
-)
+    var id: Long? = null,
+    var childMenuItems: List<MenuItem>? = null,
+    var svg: String? = null,
+    var name: String? = null,
+    var titleColor: String? = null,
+    var iconTint: String? = null
+): Serializable

@@ -37,4 +37,29 @@
         <item name="android:textColor">@color/wallet_MaterialDialogCancelButtonTextColor</item>
     </style>
 
+    <style name="WalletTextInput" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="endIconTint">@color/color_1_30</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="hintTextAppearance">@style/WalletTextInputLayoutHint</item>
+        <item name="android:textColorHint">@color/color_1_30</item>
+        <item name="hintTextColor">@color/color_1_30</item>
+        <item name="passwordToggleTint">@color/color_1_30</item>
+        <item name="errorTextColor">@color/color_red</item>
+        <item name="errorIconDrawable">@null</item>
+        <item name="boxBackgroundMode">none</item>
+        <item name="backgroundTint">@android:color/transparent</item>
+    </style>
+
+    <style name="WalletTextInputLayoutHint" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/color_1</item>
+        <item name="android:textSize">@dimen/_12sp</item>
+    </style>
+
+
+    <style name="WalletTextInputEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@color/transparent</item>
+        <item name="android:textSize">36sp</item>
+        <item name="android:textColor">@color/color_1</item>
+        <item name="android:textCursorDrawable">@null</item>
+    </style>
 </resources>

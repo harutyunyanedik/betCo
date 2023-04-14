@@ -7,6 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00FFFFFF</color>
     <color name="myAccentColor">#99A71F</color>
     <color name="myWindowBackground">#1A000000</color>
 
@@ -23,6 +24,9 @@
     <color name="color_1_30">#4DFFFFFF</color>
     <color name="color_1_20">#33FFFFFF</color>
     <color name="color_1_10">#1AFFFFFF</color>
+
+
+    <color name="color_red">#D60E13</color>
 
     <color name="status_bar_color">@color/toolbar_color</color>
     <color name="toolbar_color">#FF5722</color>

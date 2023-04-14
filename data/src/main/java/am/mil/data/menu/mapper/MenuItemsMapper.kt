@@ -7,8 +7,18 @@ import am.mil.domain.menu.model.MenuItem
 object MenuItemsMapper {
 
     val menuItemsMapper: Mapper<List<MenuItemDto>?, List<MenuItem>> = { response ->
-        response?.map { dto ->
-            MenuItem(id = dto.id, name = dto.name, svg = dto.svg, parentId = dto.parentId, parentNodeId = dto.parentNodeId)
+        createMenuItemList(response)
+    }
+
+    private fun createMenuItemList(menuItemDto: List<MenuItemDto>?): List<MenuItem> {
+        return menuItemDto?.map {
+            createMenuItem(it).apply {
+                if (!it.childMenuItems.isNullOrEmpty()) {
+                    childMenuItems = createMenuItemList(it.childMenuItems)
+                }
+            }
         } ?: emptyList()
     }
+
+    private fun createMenuItem(dto: MenuItemDto) = MenuItem(id = dto.id, svg = dto.svg, name = dto.name, titleColor = dto.textColor, iconTint = dto.iconColor)
 }

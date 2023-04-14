@@ -60,4 +60,20 @@
         android:id="@+id/action_global_accountFragment"
         app:destination="@id/accountFragment" />
 
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="am.mil.walletapplication.category.CategoryFragment"
+        android:label="CategoryFragment"
+        tools:layout="@layout/fragment_category" >
+
+        <argument
+            android:name="menuItem"
+            app:argType="am.mil.domain.menu.model.MenuItem" />
+
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_categoryFragment"
+        app:destination="@id/categoryFragment" />
+
 </navigation>

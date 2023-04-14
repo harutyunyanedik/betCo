@@ -1,6 +1,7 @@
 package am.mil.walletapplication
 
 import am.mil.walletapplication.base.coroutine.BaseCoroutineExceptionHandler
+import am.mil.walletapplication.base.utils.Prefs
 import am.mil.walletapplication.di.appComponent
 import android.app.Application
 import android.content.Context
@@ -33,6 +34,11 @@ class WalletApplication : Application(), LifecycleObserver {
         currentActivityState = ProcessLifecycleOwner.get().lifecycle
         currentActivityState.addObserver(this)
         listenToNetworkChange()
+        Prefs.Builder()
+            .setContext(this)
+            .setPrefsName(packageName)
+            .setUseDefaultSharedPreference(true)
+            .build()
     }
 
     private fun setupKoin() {

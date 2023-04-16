@@ -2,6 +2,7 @@ package am.mil.walletapplication.home
 
 import am.mil.walletapplication.R
 import am.mil.walletapplication.base.fragment.BaseWalletFragment
+import am.mil.walletapplication.base.utils.WalletConstants.STRING_SPACE
 import am.mil.walletapplication.base.utils.WalletPreferencesManager
 import am.mil.walletapplication.base.utils.viewLifecycle
 import am.mil.walletapplication.category.CategoryAdapter
@@ -13,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -33,6 +35,7 @@ class HomeMainTabFragment : BaseWalletFragment() {
         super.onCreate(savedInstanceState)
         addLoader()
         viewModel.getCategories()
+        viewModel.getBalance()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -74,6 +77,11 @@ class HomeMainTabFragment : BaseWalletFragment() {
         viewModel.categoryItemsLiveData.observe(viewLifecycleOwner) {
             removeLoader()
             categoryAdapter.updateData(it.toMutableList())
+        }
+
+        viewModel.balanceLiveData.observe(viewLifecycleOwner) {
+            binding.showHidePasswordImageView.isVisible = it.balance != null
+            binding.balanceTextView.text = listOf(it.balance, it.currency).joinToString(STRING_SPACE)
         }
     }
 }

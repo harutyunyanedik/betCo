@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="fragment"
             type="am.mil.walletapplication.home.HomeMainTabFragment" />
@@ -30,7 +31,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
             android:layout_marginEnd="@dimen/_24dp"
-            android:text="0.00 AMD"
             android:textColor="@color/color_1"
             android:textSize="36sp"
             android:textStyle="normal"
@@ -38,7 +38,7 @@
             app:layout_constraintEnd_toEndOf="@id/toolbarLayout"
             app:layout_constraintStart_toStartOf="@id/toolbarLayout"
             app:layout_constraintTop_toTopOf="@id/searchImageView"
-            tools:ignore="HardcodedText" />
+            tools:text="0.00 AMD" />
 
         <ImageView
             android:id="@+id/showHidePasswordImageView"
@@ -46,6 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:src="@drawable/ic_password_hide"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/balanceTextView"
             app:layout_constraintStart_toEndOf="@id/balanceTextView"
             app:layout_constraintTop_toTopOf="@id/balanceTextView"

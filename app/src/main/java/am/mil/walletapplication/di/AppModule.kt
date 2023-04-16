@@ -27,5 +27,5 @@ internal val appModule = module {
 //    scope(named<HomeMainTabFragment>()) {
 //        viewModel { HomeMainTabViewModel(get()) }
 //    }
-    viewModel { HomeMainTabViewModel(get()) }
+    viewModel { HomeMainTabViewModel(get(), get()) }
 }

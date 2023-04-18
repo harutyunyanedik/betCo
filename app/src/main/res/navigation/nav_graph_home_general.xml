@@ -24,10 +24,15 @@
         android:id="@+id/historyFragment"
         android:name="am.mil.walletapplication.history.HistoryMainTabFragment"
         android:label="HistoryFragment"
-        tools:layout="@layout/fragment_history_main_tab" />
+        tools:layout="@layout/fragment_history_main_tab">
+
+        <argument
+            android:name="history"
+            app:argType="am.mil.domain.history.model.HistoryItem" />
+    </fragment>
 
     <action
-        android:id="@+id/action_global_prematchFragment"
+        android:id="@+id/action_global_historyFragment"
         app:destination="@id/historyFragment" />
 
     <fragment
@@ -64,7 +69,7 @@
         android:id="@+id/categoryFragment"
         android:name="am.mil.walletapplication.category.CategoryFragment"
         android:label="CategoryFragment"
-        tools:layout="@layout/fragment_category" >
+        tools:layout="@layout/fragment_category">
 
         <argument
             android:name="category"

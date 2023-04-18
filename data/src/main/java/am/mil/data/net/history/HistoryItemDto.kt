@@ -10,4 +10,6 @@ data class HistoryItemDto(
     val title: String? = null,
     @SerializedName("description")
     val description: String? = null,
+    @SerializedName("transactionDate")
+    val transactionDate: String? = null,
 ) : Serializable

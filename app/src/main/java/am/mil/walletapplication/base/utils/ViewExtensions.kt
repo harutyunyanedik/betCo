@@ -2,7 +2,6 @@ package am.mil.walletapplication.base.utils
 
 import am.mil.walletapplication.HomeActivity
 import am.mil.walletapplication.HomeViewModel
-import am.mil.walletapplication.R
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -10,18 +9,10 @@ import android.content.Intent
 import android.os.Parcelable
 import android.text.Editable
 import android.text.TextWatcher
-import android.text.method.PasswordTransformationMethod
 import android.util.SparseArray
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.DatePicker
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.Spinner
-import android.widget.TextView
+import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker
@@ -30,11 +21,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import com.google.android.material.tabs.TabLayout
 import com.journeyapps.barcodescanner.ScanOptions
-import java.util.Calendar
+import java.util.*
 
 fun Context.copyTextToClipboard(copyText: String) {
     val clipboard = this.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-    val clip: ClipData = ClipData.newPlainText(WalletConstants.CLIPBOARD_SIMPLE_TEXT_LABEL, copyText)
+    val clip: ClipData =
+        ClipData.newPlainText(WalletConstants.CLIPBOARD_SIMPLE_TEXT_LABEL, copyText)
     clipboard.setPrimaryClip(clip)
 }
 
@@ -68,7 +60,8 @@ fun Spinner.onItemSelected(
     }
 }
 
-fun Spinner.selectedPosition(): Int = if (this.selectedItemPosition == -1) 0 else this.selectedItemPosition
+fun Spinner.selectedPosition(): Int =
+    if (this.selectedItemPosition == -1) 0 else this.selectedItemPosition
 
 fun RadioGroup.checkedRadioButton(): RadioButton? = findViewById(checkedRadioButtonId)
 

@@ -29,7 +29,10 @@ class HomeActivity : BaseWalletActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Utils.changeStatusBarColor(activity = this, color = ContextCompat.getColor(this, R.color.status_bar_color))
+        Utils.changeStatusBarColor(
+            activity = this,
+            color = ContextCompat.getColor(this, R.color.status_bar_color)
+        )
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
         noConnectionTextView = findViewById(R.id.noConnectionTextView)
@@ -43,7 +46,8 @@ class HomeActivity : BaseWalletActivity() {
 
     private fun setupViews() {
         binding?.bottomNavigationView?.menu?.children?.forEachIndexed { index, menuItem ->
-            menuItem.title = resources.getStringArray(R.array.navigationMenu_titles_ResIds_Array)[index]
+            menuItem.title =
+                resources.getStringArray(R.array.navigationMenu_titles_ResIds_Array)[index]
         }
     }
 
@@ -73,29 +77,54 @@ class HomeActivity : BaseWalletActivity() {
 
         controller?.observe(this) { navController ->
             when (navController.graph.startDestinationId) {
-                R.id.homeFakeFragment -> setConditionalStartDestination(navController, R.id.homeFragment)
-                R.id.historyFakeFragment -> setConditionalStartDestination(navController, R.id.historyFragment)
-                R.id.scannerFakeFragment -> setConditionalStartDestination(navController, R.id.scannerFragment)
-                R.id.cardsFakeFragment -> setConditionalStartDestination(navController, R.id.cardsFragment)
-                R.id.accountFakeFragment -> setConditionalStartDestination(navController, R.id.accountFragment)
+                R.id.homeFakeFragment -> setConditionalStartDestination(
+                    navController,
+                    R.id.homeFragment
+                )
+                R.id.historyFakeFragment -> setConditionalStartDestination(
+                    navController,
+                    R.id.historyFragment
+                )
+                R.id.scannerFakeFragment -> setConditionalStartDestination(
+                    navController,
+                    R.id.scannerFragment
+                )
+                R.id.cardsFakeFragment -> setConditionalStartDestination(
+                    navController,
+                    R.id.cardsFragment
+                )
+                R.id.accountFakeFragment -> setConditionalStartDestination(
+                    navController,
+                    R.id.accountFragment
+                )
             }
 
             navController.addOnDestinationChangedListener { _, _, _ ->
                 findPrimaryNavigationFragment()?.onStateInVisible()
                 navigationDestinationHandler.removeCallbacks(navigationDestinationRunnable)
-                navigationDestinationHandler.postDelayed(navigationDestinationRunnable, NAVIGATION_DESTINATION_DURATION)
+                navigationDestinationHandler.postDelayed(
+                    navigationDestinationRunnable,
+                    NAVIGATION_DESTINATION_DURATION
+                )
             }
         }
     }
 
-    private fun setConditionalStartDestination(navController: NavController, @IdRes startDestId: Int, bundle: Bundle? = null) {
+    private fun setConditionalStartDestination(
+        navController: NavController,
+        @IdRes startDestId: Int,
+        bundle: Bundle? = null
+    ) {
         navController.navInflater.inflate(R.navigation.nav_graph_home_general).apply {
             setStartDestination(startDestId)
             navController.setGraph(this, bundle)
         }
     }
 
-    private fun findPrimaryNavigationFragment() = supportFragmentManager.primaryNavigationFragment?.childFragmentManager?.fragments?.getOrNull(0) as? BaseWalletFragment
+    private fun findPrimaryNavigationFragment() =
+        supportFragmentManager.primaryNavigationFragment?.childFragmentManager?.fragments?.getOrNull(
+            0
+        ) as? BaseWalletFragment
 
     @Deprecated("deprecated")
     override fun onBackPressed() {

@@ -10,13 +10,16 @@ import android.os.Looper
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 
-class LaunchActivity: BaseWalletActivity() {
+class LaunchActivity : BaseWalletActivity() {
 
     private var binding: ActivityLaunchBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Utils.changeStatusBarColor(activity = this, color = ContextCompat.getColor(this, R.color.status_bar_color))
+        Utils.changeStatusBarColor(
+            activity = this,
+            color = ContextCompat.getColor(this, R.color.status_bar_color)
+        )
         binding = DataBindingUtil.setContentView(this, R.layout.activity_launch)
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this, HomeActivity::class.java))

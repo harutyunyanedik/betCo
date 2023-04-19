@@ -20,5 +20,8 @@ object CategoriesMapper {
         } ?: emptyList()
     }
 
-    private fun createCategoryItem(dto: CategoryItemDto) = CategoryItem(id = dto.id, svg = dto.svg, name = dto.name, titleColor = dto.textColor, iconTint = dto.iconColor)
+    private fun createCategoryItem(dto: CategoryItemDto) = CategoryItem(
+        id = dto.id, svg = dto.svg, name = dto.name,
+        titleColor = dto.textColor, iconTint = dto.iconColor
+    )
 }

@@ -1,62 +1,54 @@
 package am.mil.walletapplication.history
 
-import am.mil.domain.history.model.HistoryItem
+import am.mil.domain.history.model.History
 import am.mil.walletapplication.databinding.ItemHistoryBinding
-import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
 
-class HistoryPagingAdapter(private val itemClick: (HistoryItem) -> Unit) :
+class HistoryPagingAdapter(private val itemClick: (History.HistoryItem) -> Unit) :
 
-    PagingDataAdapter<HistoryItem,
+    PagingDataAdapter<History.HistoryItem,
             HistoryPagingAdapter.HistoryViewHolder>(HistoryItemComparator) {
 
-    private val items: MutableList<HistoryItem> = mutableListOf()
-    private lateinit var context: Context
-    private lateinit var layoutInflater: LayoutInflater
-
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
-        super.onAttachedToRecyclerView(recyclerView)
-        context = recyclerView.context
-        layoutInflater = LayoutInflater.from(context)
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun updateData(items: MutableList<HistoryItem>?) {
-        this.items.clear()
-        items?.let { this.items.addAll(items) }
-    }
-
-    override fun getItemCount(): Int = items.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder =
-        HistoryViewHolder(ItemHistoryBinding.inflate(layoutInflater, parent, false))
+        HistoryViewHolder(
+            ItemHistoryBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
 
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
-        holder.historyTitle.text = items[position].title
-        holder.historyDesc.text = items[position].description
-        holder.historyDate.text = items[position].transactionDate
+        getItem(position)?.let { historyItem ->
+            holder.binding.historyItemDesc.text = historyItem.description
+            holder.binding.historyItemDate.text = historyItem.createDate
+            holder.binding.root.setOnClickListener {
+                itemClick.invoke(historyItem)
+            }
+        }
     }
 
-    inner class HistoryViewHolder(binding: ItemHistoryBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        val historyTitle: TextView = binding.historyItemTitle
-        val historyDesc: TextView = binding.historyItemDesc
-        val historyDate: TextView = binding.historyItemDate
-    }
+    inner class HistoryViewHolder(val binding: ItemHistoryBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
-    object HistoryItemComparator : DiffUtil.ItemCallback<HistoryItem>() {
-        override fun areItemsTheSame(oldItem: HistoryItem, newItem: HistoryItem): Boolean {
+    object HistoryItemComparator : DiffUtil.ItemCallback<History.HistoryItem>() {
+        override fun areItemsTheSame(
+            oldItem: History.HistoryItem,
+            newItem: History.HistoryItem
+        ): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: HistoryItem, newItem: HistoryItem): Boolean {
+        override fun areContentsTheSame(
+            oldItem: History.HistoryItem,
+            newItem: History.HistoryItem
+        ): Boolean {
             return oldItem == newItem
         }
     }

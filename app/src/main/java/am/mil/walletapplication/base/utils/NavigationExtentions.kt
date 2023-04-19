@@ -14,18 +14,19 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.navigation.NavController
-import androidx.navigation.NavDirections
-import androidx.navigation.NavOptions
-import androidx.navigation.Navigator
-import androidx.navigation.findNavController
+import androidx.navigation.*
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.*
 
 private val navigationStack: Stack<Int> = Stack()
 
-fun BottomNavigationView.setupWithNavController(navGraphIds: List<Int>, fragmentManager: FragmentManager, containerId: Int, intent: Intent): LiveData<NavController> {
+fun BottomNavigationView.setupWithNavController(
+    navGraphIds: List<Int>,
+    fragmentManager: FragmentManager,
+    containerId: Int,
+    intent: Intent
+): LiveData<NavController> {
 
     // Map of tags
     val graphIdToTagMap = SparseArray<String>()
@@ -237,7 +238,8 @@ private fun obtainNavHostFragment(
     containerId: Int
 ): DispatchInsetsNavHostFragment {
     // If the Nav Host fragment exists, return it
-    val existingFragment = fragmentManager.findFragmentByTag(fragmentTag) as DispatchInsetsNavHostFragment?
+    val existingFragment =
+        fragmentManager.findFragmentByTag(fragmentTag) as DispatchInsetsNavHostFragment?
     existingFragment?.let { return it }
 
     // Otherwise, create it and return it.
@@ -277,7 +279,8 @@ fun NavController.navigateSafe(destination: NavDirections) = with(this) {
         ?.let { navigate(destination) }
 }
 
-fun Fragment.getNavigationResult(key: String = "result") = findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<Any?>(key)
+fun Fragment.getNavigationResult(key: String = "result") =
+    findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<Any?>(key)
 
 @JvmName("getNavigationResultTyped")
 fun <T> Fragment.getNavigationResult(key: String = "result") =

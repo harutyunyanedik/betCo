@@ -31,7 +31,8 @@ dependencies {
 
     // Single LiveData event
     api "com.github.hadilq.liveevent:liveevent:1.2.0"
-
+    // Android Jetpack Paging 3.0
+    implementation "androidx.paging:paging-runtime:3.0.0-alpha06"
     // Coroutines
     def coroutinesVersion = '1.6.4'
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"

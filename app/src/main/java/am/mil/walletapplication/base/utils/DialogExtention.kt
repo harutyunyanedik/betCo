@@ -26,7 +26,10 @@ fun Activity.createDialog(view: View, isCancelable: Boolean = true): Dialog? {
     return createDialog(view, isCancelable, this)
 }
 
-fun Activity.createWalletMessageDialog(errorMessageData: WalletDefaultDialogData, isShowCancelButton: Boolean = false): Dialog? {
+fun Activity.createWalletMessageDialog(
+    errorMessageData: WalletDefaultDialogData,
+    isShowCancelButton: Boolean = false
+): Dialog? {
     return createWalletMessageDialog(errorMessageData, this, isShowCancelButton)
 }
 
@@ -62,13 +65,18 @@ fun createDialog(view: View, isCancelable: Boolean, context: Context): Dialog? {
     return dialog
 }
 
-fun createWalletMessageDialog(messageData: WalletDefaultDialogData, context: Context, isShowCancelButton: Boolean = false): Dialog {
-    val materialAlertDialog = MaterialAlertDialogBuilder(context, R.style.BaseMaterialAlertDialogStyle).apply {
-        setTitle(messageData.title)
-        setMessage(messageData.message)
-        setCancelable(messageData.isCancelable)
-        messageData.iconRes?.let { setIcon(it) }
-    }
+fun createWalletMessageDialog(
+    messageData: WalletDefaultDialogData,
+    context: Context,
+    isShowCancelButton: Boolean = false
+): Dialog {
+    val materialAlertDialog =
+        MaterialAlertDialogBuilder(context, R.style.BaseMaterialAlertDialogStyle).apply {
+            setTitle(messageData.title)
+            setMessage(messageData.message)
+            setCancelable(messageData.isCancelable)
+            messageData.iconRes?.let { setIcon(it) }
+        }
 
     materialAlertDialog.setPositiveButton(messageData.positiveButtonText) { dialogInterface, _ ->
         messageData.okClick()
@@ -88,10 +96,12 @@ fun createWalletMessageDialog(messageData: WalletDefaultDialogData, context: Con
 
 fun getLayoutParams(dialog: Dialog, context: Context): WindowManager.LayoutParams {
     val displayMetrics = getDeviceDisplayMetrics(context as Activity)
-    val dialogWidth = if (displayMetrics.widthPixels <= displayMetrics.heightPixels) displayMetrics.widthPixels else displayMetrics.heightPixels
+    val dialogWidth =
+        if (displayMetrics.widthPixels <= displayMetrics.heightPixels) displayMetrics.widthPixels else displayMetrics.heightPixels
     val layoutParams = WindowManager.LayoutParams()
     layoutParams.copyFrom(dialog.window?.attributes)
-    layoutParams.width = dialogWidth - context.resources.getDimensionPixelSize(R.dimen.dialog_margin)
+    layoutParams.width =
+        dialogWidth - context.resources.getDimensionPixelSize(R.dimen.dialog_margin)
     layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT
     return layoutParams
 }

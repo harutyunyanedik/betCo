@@ -270,6 +270,9 @@ object VectorDrawableCreator {
     }
 
     class PathData(var data: ByteArray, var color: Int) {
-        constructor(data: String, color: Int) : this(data.toByteArray(StandardCharsets.UTF_8), color)
+        constructor(data: String, color: Int) : this(
+            data.toByteArray(StandardCharsets.UTF_8),
+            color
+        )
     }
 }

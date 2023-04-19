@@ -155,7 +155,8 @@ fun Activity.clearFocus() {
  * Changes size of dialog to adjust it when keyboard is open
  */
 fun Dialog.setPeekHeight() {
-    val bottomSheet = this.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet) as FrameLayout?
+    val bottomSheet =
+        this.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet) as FrameLayout?
     val behavior = BottomSheetBehavior.from(bottomSheet!!)
 
     val displayMetrics = this.ownerActivity!!.resources.displayMetrics
@@ -215,7 +216,12 @@ fun TextView.setClickableText(
 
     colorRes?.let {
         val color = ResourcesCompat.getColor(context.resources, colorRes, context.theme)
-        spannableString.setSpan(ForegroundColorSpan(color), startIndex, newEndIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableString.setSpan(
+            ForegroundColorSpan(color),
+            startIndex,
+            newEndIndex,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
     }
     onTextClick?.let {
         var lastTimeClicked: Long = 0
@@ -235,7 +241,12 @@ fun TextView.setClickableText(
                 ds.isUnderlineText = false
             }
         }
-        spannableString.setSpan(clickableSpan, startIndex, newEndIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableString.setSpan(
+            clickableSpan,
+            startIndex,
+            newEndIndex,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
         movementMethod = LinkMovementMethod.getInstance()
     }
     text = spannableString
@@ -270,7 +281,8 @@ fun ViewGroup.isAllEnabled(isEnabled: Boolean) {
 }
 
 @Suppress("unused")
-fun ViewPager2.doOnPageSelected(onPageSelected: (position: Int) -> Unit) = registerOnPageChangeCallback(onPageSelected = onPageSelected)
+fun ViewPager2.doOnPageSelected(onPageSelected: (position: Int) -> Unit) =
+    registerOnPageChangeCallback(onPageSelected = onPageSelected)
 
 inline fun ViewPager2.registerOnPageChangeCallback(
     crossinline onPageScrolled: (
@@ -284,7 +296,11 @@ inline fun ViewPager2.registerOnPageChangeCallback(
 
     val onPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
 
-        override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) =
+        override fun onPageScrolled(
+            position: Int,
+            positionOffset: Float,
+            positionOffsetPixels: Int
+        ) =
             onPageScrolled.invoke(position, positionOffset, positionOffsetPixels)
 
         override fun onPageSelected(position: Int) = onPageSelected.invoke(position)

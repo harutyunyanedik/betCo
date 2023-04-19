@@ -12,7 +12,11 @@ import android.view.WindowManager
 
 object Utils {
 
-    fun changeStatusBarColor(isTranslucentStatusBar: Boolean = false, color: Int = 0, activity: Activity) {
+    fun changeStatusBarColor(
+        isTranslucentStatusBar: Boolean = false,
+        color: Int = 0,
+        activity: Activity
+    ) {
         if (isTranslucentStatusBar) {
             val window: Window = activity.window
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)

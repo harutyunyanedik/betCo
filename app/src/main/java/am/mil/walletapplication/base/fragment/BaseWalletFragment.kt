@@ -8,7 +8,7 @@ import am.mil.walletapplication.base.utils.unbindDrawables
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import java.util.Stack
+import java.util.*
 
 abstract class BaseWalletFragment : Fragment() {
 
@@ -63,7 +63,7 @@ abstract class BaseWalletFragment : Fragment() {
     fun showLoadingDialog() {
         (requireActivity() as BaseWalletActivity).showLoadingDialog()
     }
-    
+
     fun dismissLoadingDialog() {
         (requireActivity() as BaseWalletActivity).dismissLoadingDialog()
     }
@@ -75,7 +75,7 @@ abstract class BaseWalletFragment : Fragment() {
     open fun onStateInVisible() {}
 
     open fun onStateVisible() {}
-    
+
     companion object {
         fun addLoader() {
             BaseWalletActivity.addLoader()
@@ -85,7 +85,12 @@ abstract class BaseWalletFragment : Fragment() {
             BaseWalletActivity.removeLoader()
         }
 
-        fun showErrorMessageDialog(title: String, message: String, iconRes: Int = R.drawable.ic_success, isCancelable: Boolean = true) {
+        fun showErrorMessageDialog(
+            title: String,
+            message: String,
+            iconRes: Int = R.drawable.ic_success,
+            isCancelable: Boolean = true
+        ) {
             BaseWalletActivity.showErrorMessageDialog(title, message, iconRes, isCancelable)
         }
 
@@ -93,7 +98,12 @@ abstract class BaseWalletFragment : Fragment() {
             BaseWalletActivity.showErrorMessageDialog(errorMessageDialogData)
         }
 
-        fun showSuccessMessageDialog(title: String, message: String, iconRes: Int = R.drawable.ic_success, isCancelable: Boolean = true) {
+        fun showSuccessMessageDialog(
+            title: String,
+            message: String,
+            iconRes: Int = R.drawable.ic_success,
+            isCancelable: Boolean = true
+        ) {
             BaseWalletActivity.showSuccessMessageDialog(title, message, iconRes, isCancelable)
         }
 
@@ -101,7 +111,12 @@ abstract class BaseWalletFragment : Fragment() {
             BaseWalletActivity.showSuccessMessageDialog(successMessageDialogData)
         }
 
-        fun showInfoMessageDialog(title: String, message: String, iconRes: Int = R.drawable.ic_info, isCancelable: Boolean = true) {
+        fun showInfoMessageDialog(
+            title: String,
+            message: String,
+            iconRes: Int = R.drawable.ic_info,
+            isCancelable: Boolean = true
+        ) {
             BaseWalletActivity.showInfoMessageDialog(title, message, iconRes, isCancelable)
         }
 
@@ -109,8 +124,22 @@ abstract class BaseWalletFragment : Fragment() {
             BaseWalletActivity.showInfoMessageDialog(successMessageDialogData)
         }
 
-        fun showConfirmationMessageDialog(title: String, message: String, iconRes: Int = R.drawable.ic_confirmation, isCancelable: Boolean = true, okClick: () -> Unit = {}, cancelClick: () -> Unit = {}) {
-            BaseWalletActivity.showConfirmationMessageDialog(title, message, iconRes, isCancelable, okClick = okClick, cancelClick = cancelClick)
+        fun showConfirmationMessageDialog(
+            title: String,
+            message: String,
+            iconRes: Int = R.drawable.ic_confirmation,
+            isCancelable: Boolean = true,
+            okClick: () -> Unit = {},
+            cancelClick: () -> Unit = {}
+        ) {
+            BaseWalletActivity.showConfirmationMessageDialog(
+                title,
+                message,
+                iconRes,
+                isCancelable,
+                okClick = okClick,
+                cancelClick = cancelClick
+            )
         }
 
         fun showConfirmationMessageDialog(successMessageDialogData: WalletDefaultDialogData) {

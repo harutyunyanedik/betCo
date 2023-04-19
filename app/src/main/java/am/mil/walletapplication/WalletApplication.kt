@@ -51,28 +51,34 @@ class WalletApplication : Application(), LifecycleObserver {
     }
 
     private fun listenToNetworkChange() {
-        val networkCallback: ConnectivityManager.NetworkCallback = object : ConnectivityManager.NetworkCallback() {
-            override fun onAvailable(network: Network) {
-                isLastNetworkStateWasConnected = true
-                networkStateLiveData.postValue(true)
-            }
-
-            override fun onLost(network: Network) {
-                if (isLastNetworkStateWasConnected == true && (currentActivityState.currentState == Lifecycle.State.STARTED || currentActivityState.currentState == Lifecycle.State.RESUMED)) {
-                    if (System.currentTimeMillis() - (lastNoInternetShownToastTime ?: 0) > SHOW_NO_INTERNET_CONNECTION_POPUP_TIME_RANGE) {
-                        lastNoInternetShownToastTime = System.currentTimeMillis()
-                    }
+        val networkCallback: ConnectivityManager.NetworkCallback =
+            object : ConnectivityManager.NetworkCallback() {
+                override fun onAvailable(network: Network) {
+                    isLastNetworkStateWasConnected = true
+                    networkStateLiveData.postValue(true)
                 }
-                isLastNetworkStateWasConnected = false
-                networkStateLiveData.postValue(false)
-            }
-        }
 
-        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+                override fun onLost(network: Network) {
+                    if (isLastNetworkStateWasConnected == true && (currentActivityState.currentState == Lifecycle.State.STARTED || currentActivityState.currentState == Lifecycle.State.RESUMED)) {
+                        if (System.currentTimeMillis() - (lastNoInternetShownToastTime
+                                ?: 0) > SHOW_NO_INTERNET_CONNECTION_POPUP_TIME_RANGE
+                        ) {
+                            lastNoInternetShownToastTime = System.currentTimeMillis()
+                        }
+                    }
+                    isLastNetworkStateWasConnected = false
+                    networkStateLiveData.postValue(false)
+                }
+            }
+
+        val connectivityManager =
+            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             connectivityManager.registerDefaultNetworkCallback(networkCallback)
         } else {
-            val request = NetworkRequest.Builder().addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET).build()
+            val request =
+                NetworkRequest.Builder().addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                    .build()
             connectivityManager.registerNetworkCallback(request, networkCallback)
         }
     }
@@ -84,8 +90,9 @@ class WalletApplication : Application(), LifecycleObserver {
         var lastNoInternetShownToastTime: Long? = null
         const val SHOW_NO_INTERNET_CONNECTION_POPUP_TIME_RANGE = 4000
 
-        fun getCoroutineContext() = Dispatchers.Main + SupervisorJob() + BaseCoroutineExceptionHandler(
-            CoroutineExceptionHandler
-        )
+        fun getCoroutineContext() =
+            Dispatchers.Main + SupervisorJob() + BaseCoroutineExceptionHandler(
+                CoroutineExceptionHandler
+            )
     }
 }

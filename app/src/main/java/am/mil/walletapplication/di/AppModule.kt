@@ -3,6 +3,7 @@ package am.mil.walletapplication.di
 import am.mil.domain.base.DispatcherProvider
 import am.mil.walletapplication.HomeActivity
 import am.mil.walletapplication.HomeViewModel
+import am.mil.walletapplication.history.HistoryMainTabViewModel
 import am.mil.walletapplication.home.HomeMainTabViewModel
 import kotlinx.coroutines.Dispatchers
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -28,4 +29,5 @@ internal val appModule = module {
 //        viewModel { HomeMainTabViewModel(get()) }
 //    }
     viewModel { HomeMainTabViewModel(get(), get()) }
+    viewModel { HistoryMainTabViewModel(get()) }
 }

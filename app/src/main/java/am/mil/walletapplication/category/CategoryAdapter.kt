@@ -1,7 +1,7 @@
 package am.mil.walletapplication.category
 
-import am.mil.domain.category.model.CategoryItemViewTypeEnum
 import am.mil.domain.category.model.CategoryItem
+import am.mil.domain.category.model.CategoryItemViewTypeEnum
 import am.mil.walletapplication.base.utils.VectorDrawableCreator
 import am.mil.walletapplication.databinding.ItemCategoryGridBinding
 import am.mil.walletapplication.databinding.ItemCategoryLinearBinding
@@ -16,7 +16,10 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 
-class CategoryAdapter(var itemViewType: CategoryItemViewTypeEnum = CategoryItemViewTypeEnum.GRID, private val itemClick: (CategoryItem) -> Unit) : RecyclerView.Adapter<CategoryAdapter.BaseViewHolder>() {
+class CategoryAdapter(
+    var itemViewType: CategoryItemViewTypeEnum = CategoryItemViewTypeEnum.GRID,
+    private val itemClick: (CategoryItem) -> Unit
+) : RecyclerView.Adapter<CategoryAdapter.BaseViewHolder>() {
 
     private val items: MutableList<CategoryItem> = mutableListOf()
     private lateinit var context: Context
@@ -39,13 +42,26 @@ class CategoryAdapter(var itemViewType: CategoryItemViewTypeEnum = CategoryItemV
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder =
         when (viewType) {
-            CategoryItemViewTypeEnum.GRID.type -> CategoryGridViewHolder(ItemCategoryGridBinding.inflate(layoutInflater, parent, false))
-            else -> CategoryLinearViewHolder(ItemCategoryLinearBinding.inflate(layoutInflater, parent, false))
+            CategoryItemViewTypeEnum.GRID.type -> CategoryGridViewHolder(
+                ItemCategoryGridBinding.inflate(
+                    layoutInflater,
+                    parent,
+                    false
+                )
+            )
+            else -> CategoryLinearViewHolder(
+                ItemCategoryLinearBinding.inflate(
+                    layoutInflater,
+                    parent,
+                    false
+                )
+            )
         }
 
     override fun getItemCount(): Int = items.size
 
-    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) = holder.bind(items[position])
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) =
+        holder.bind(items[position])
 
     abstract inner class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -61,7 +77,12 @@ class CategoryAdapter(var itemViewType: CategoryItemViewTypeEnum = CategoryItemV
 
         open fun bind(item: CategoryItem) {
             item.svg?.let {
-                val d = VectorDrawableCreator.getVectorDrawable(context, 24, 24, listOf(VectorDrawableCreator.PathData(it, Color.parseColor(item.iconTint))))
+                val d = VectorDrawableCreator.getVectorDrawable(
+                    context,
+                    24,
+                    24,
+                    listOf(VectorDrawableCreator.PathData(it, Color.parseColor(item.iconTint)))
+                )
                 categoryImage.background = d
             }
             categoryTitle.setTextColor(Color.parseColor(item.titleColor))
@@ -69,13 +90,15 @@ class CategoryAdapter(var itemViewType: CategoryItemViewTypeEnum = CategoryItemV
         }
     }
 
-    inner class CategoryGridViewHolder(binding: ItemCategoryGridBinding) : BaseViewHolder(binding.root) {
+    inner class CategoryGridViewHolder(binding: ItemCategoryGridBinding) :
+        BaseViewHolder(binding.root) {
         override val categoryCardView: CardView = binding.categoryCardView
         override val categoryImage: ImageView = binding.categoryImageView
         override val categoryTitle: TextView = binding.categoryNameTextView
     }
 
-    inner class CategoryLinearViewHolder(binding: ItemCategoryLinearBinding) : BaseViewHolder(binding.root) {
+    inner class CategoryLinearViewHolder(binding: ItemCategoryLinearBinding) :
+        BaseViewHolder(binding.root) {
         override val categoryCardView: CardView = binding.categoryCardView
         override val categoryImage: ImageView = binding.categoryImageView
         override val categoryTitle: TextView = binding.categoryNameTextView

@@ -28,13 +28,20 @@
 
         <argument
             android:name="history"
-            app:argType="am.mil.domain.history.model.HistoryItem" />
+            app:argType="am.mil.domain.history.model.History$HistoryItem" />
     </fragment>
 
     <action
         android:id="@+id/action_global_historyFragment"
         app:destination="@id/historyFragment" />
-
+    <fragment
+        android:id="@+id/historyDetailsFragment"
+        android:name="am.mil.walletapplication.history.TransactionHistoryDetailsFragment"
+        android:label="HistoryFragment"
+        tools:layout="@layout/fragment_history_main_tab" />
+    <action
+        android:id="@+id/action_global_historyDetailsFragment"
+        app:destination="@id/historyDetailsFragment" />
     <fragment
         android:id="@+id/scannerFragment"
         android:name="am.mil.walletapplication.qrcode.QrCodeMainTabFragment"

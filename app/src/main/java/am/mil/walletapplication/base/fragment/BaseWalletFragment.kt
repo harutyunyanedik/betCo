@@ -8,7 +8,7 @@ import am.mil.walletapplication.base.utils.unbindDrawables
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import java.util.*
+import java.util.Stack
 
 abstract class BaseWalletFragment : Fragment() {
 
@@ -25,8 +25,7 @@ abstract class BaseWalletFragment : Fragment() {
 
     private fun observeLiveData() {
         networkStateLiveData.observe(viewLifecycleOwner) {
-            if (it != true)
-                hideSwipeRefreshLayoutAction()
+            if (it != true) hideSwipeRefreshLayoutAction()
         }
     }
 
@@ -86,10 +85,7 @@ abstract class BaseWalletFragment : Fragment() {
         }
 
         fun showErrorMessageDialog(
-            title: String,
-            message: String,
-            iconRes: Int = R.drawable.ic_success,
-            isCancelable: Boolean = true
+            title: String, message: String, iconRes: Int = R.drawable.ic_success, isCancelable: Boolean = true
         ) {
             BaseWalletActivity.showErrorMessageDialog(title, message, iconRes, isCancelable)
         }
@@ -99,10 +95,7 @@ abstract class BaseWalletFragment : Fragment() {
         }
 
         fun showSuccessMessageDialog(
-            title: String,
-            message: String,
-            iconRes: Int = R.drawable.ic_success,
-            isCancelable: Boolean = true
+            title: String, message: String, iconRes: Int = R.drawable.ic_success, isCancelable: Boolean = true
         ) {
             BaseWalletActivity.showSuccessMessageDialog(title, message, iconRes, isCancelable)
         }
@@ -112,10 +105,7 @@ abstract class BaseWalletFragment : Fragment() {
         }
 
         fun showInfoMessageDialog(
-            title: String,
-            message: String,
-            iconRes: Int = R.drawable.ic_info,
-            isCancelable: Boolean = true
+            title: String, message: String, iconRes: Int = R.drawable.ic_info, isCancelable: Boolean = true
         ) {
             BaseWalletActivity.showInfoMessageDialog(title, message, iconRes, isCancelable)
         }
@@ -125,20 +115,10 @@ abstract class BaseWalletFragment : Fragment() {
         }
 
         fun showConfirmationMessageDialog(
-            title: String,
-            message: String,
-            iconRes: Int = R.drawable.ic_confirmation,
-            isCancelable: Boolean = true,
-            okClick: () -> Unit = {},
-            cancelClick: () -> Unit = {}
+            title: String, message: String, iconRes: Int = R.drawable.ic_confirmation, isCancelable: Boolean = true, okClick: () -> Unit = {}, cancelClick: () -> Unit = {}
         ) {
             BaseWalletActivity.showConfirmationMessageDialog(
-                title,
-                message,
-                iconRes,
-                isCancelable,
-                okClick = okClick,
-                cancelClick = cancelClick
+                title, message, iconRes, isCancelable, okClick = okClick, cancelClick = cancelClick
             )
         }
 

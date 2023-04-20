@@ -24,14 +24,11 @@ class CategoryFragment : BaseWalletFragment() {
     private var binding: FragmentCategoryBinding by viewLifecycle()
     private val navArgs: CategoryFragmentArgs by navArgs()
     private val categoryAdapter: CategoryAdapter = CategoryAdapter {
-        if (!it.childCategoryItems.isNullOrEmpty())
-            findNavController().navigate(CategoryFragmentDirections.actionGlobalCategoryFragment(it))
+        if (!it.childCategoryItems.isNullOrEmpty()) findNavController().navigate(CategoryFragmentDirections.actionGlobalCategoryFragment(it))
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentCategoryBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = viewLifecycleOwner
@@ -48,31 +45,24 @@ class CategoryFragment : BaseWalletFragment() {
 
     private fun setupViews() {
         binding.categoryRecyclerView.apply {
-            layoutManager =
-                if (WalletPreferencesManager.getCategoryItemViewType() == GRID) GridLayoutManager(
-                    requireContext(),
-                    GRID_SPAN_COUNT
-                ) else LinearLayoutManager(requireContext())
+            layoutManager = if (WalletPreferencesManager.getCategoryItemViewType() == GRID) GridLayoutManager(
+                requireContext(), GRID_SPAN_COUNT
+            ) else LinearLayoutManager(requireContext())
             adapter = categoryAdapter.apply {
                 itemViewType = WalletPreferencesManager.getCategoryItemViewType()
             }
         }
-        binding.balanceTextView.transformationMethod =
-            if (WalletPreferencesManager.isShowBalance()) null else PasswordTransformationMethod()
-        val imageResId =
-            if (WalletPreferencesManager.isShowBalance()) R.drawable.ic_password_hide else R.drawable.ic_password_show
+        binding.balanceTextView.transformationMethod = if (WalletPreferencesManager.isShowBalance()) null else PasswordTransformationMethod()
+        val imageResId = if (WalletPreferencesManager.isShowBalance()) R.drawable.ic_password_hide else R.drawable.ic_password_show
         binding.showHidePasswordImageView.setImageDrawable(
             ContextCompat.getDrawable(
-                requireContext(),
-                imageResId
+                requireContext(), imageResId
             )
         )
-        val filterImageResId =
-            if (WalletPreferencesManager.getCategoryItemViewType() == GRID) R.drawable.ic_list_vertical else R.drawable.ic_square_grid
+        val filterImageResId = if (WalletPreferencesManager.getCategoryItemViewType() == GRID) R.drawable.ic_list_vertical else R.drawable.ic_square_grid
         binding.filterImageView.setImageDrawable(
             ContextCompat.getDrawable(
-                requireContext(),
-                filterImageResId
+                requireContext(), filterImageResId
             )
         )
         categoryAdapter.updateData(navArgs.category.childCategoryItems?.toMutableList())
@@ -85,35 +75,28 @@ class CategoryFragment : BaseWalletFragment() {
         }
 
         binding.showHidePasswordImageView.setOnClickListener {
-            binding.balanceTextView.transformationMethod =
-                if (WalletPreferencesManager.isShowBalance()) PasswordTransformationMethod() else null
-            val imageResId =
-                if (WalletPreferencesManager.isShowBalance()) R.drawable.ic_password_show else R.drawable.ic_password_hide
+            binding.balanceTextView.transformationMethod = if (WalletPreferencesManager.isShowBalance()) PasswordTransformationMethod() else null
+            val imageResId = if (WalletPreferencesManager.isShowBalance()) R.drawable.ic_password_show else R.drawable.ic_password_hide
             binding.showHidePasswordImageView.setImageDrawable(
                 ContextCompat.getDrawable(
-                    requireContext(),
-                    imageResId
+                    requireContext(), imageResId
                 )
             )
             WalletPreferencesManager.putIsShowBalance(!WalletPreferencesManager.isShowBalance())
         }
 
         binding.filterImageView.setOnClickListener {
-            val itemViewType =
-                if (WalletPreferencesManager.getCategoryItemViewType() == GRID) LINEAR else GRID
-            val layoutManager =
-                if (WalletPreferencesManager.getCategoryItemViewType() == GRID) LinearLayoutManager(
-                    requireContext()
-                ) else GridLayoutManager(requireContext(), GRID_SPAN_COUNT)
+            val itemViewType = if (WalletPreferencesManager.getCategoryItemViewType() == GRID) LINEAR else GRID
+            val layoutManager = if (WalletPreferencesManager.getCategoryItemViewType() == GRID) LinearLayoutManager(
+                requireContext()
+            ) else GridLayoutManager(requireContext(), GRID_SPAN_COUNT)
             WalletPreferencesManager.putCategoryItemViewType(itemViewType)
             categoryAdapter.itemViewType = itemViewType
             binding.categoryRecyclerView.layoutManager = layoutManager
-            val filterImageResId =
-                if (WalletPreferencesManager.getCategoryItemViewType() == GRID) R.drawable.ic_list_vertical else R.drawable.ic_square_grid
+            val filterImageResId = if (WalletPreferencesManager.getCategoryItemViewType() == GRID) R.drawable.ic_list_vertical else R.drawable.ic_square_grid
             binding.filterImageView.setImageDrawable(
                 ContextCompat.getDrawable(
-                    requireContext(),
-                    filterImageResId
+                    requireContext(), filterImageResId
                 )
             )
             categoryAdapter.notifyDataSetChanged()

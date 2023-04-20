@@ -3,7 +3,12 @@ package am.mil.walletapplication.base.utils
 import am.mil.walletapplication.R
 import am.mil.walletapplication.base.utils.WalletConstants.EMPTY_STRING
 import android.app.Activity
-import android.content.*
+import android.content.ClipData
+import android.content.ClipDescription
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.ContextWrapper
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.util.DisplayMetrics
@@ -23,8 +28,7 @@ object Helper {
 
     fun getStatusBarHeight(context: Activity): Int {
         val height: Int
-        val idStatusBarHeight =
-            context.resources.getIdentifier("status_bar_height", "dimen", "android")
+        val idStatusBarHeight = context.resources.getIdentifier("status_bar_height", "dimen", "android")
 
         height = when {
             idStatusBarHeight > 0 -> context.resources.getDimensionPixelSize(idStatusBarHeight)
@@ -36,8 +40,7 @@ object Helper {
     fun hideSoftKeyboard(view: View?) {
         if (view != null) {
             view.clearFocus()
-            val inputMethodManager =
-                view.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+            val inputMethodManager = view.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
             unwrap(view.context)?.clearFocus()
         }
@@ -46,8 +49,7 @@ object Helper {
     fun showSoftKeyboard(view: View?) {
         view?.postDelayed({
             view.requestFocus()
-            val inputMethodManager =
-                view.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+            val inputMethodManager = view.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
             if (view is EditText) view.setSelection(view.text?.length ?: 0)
         }, 300)
@@ -67,13 +69,9 @@ object Helper {
     }
 
     fun copyToClipboard(
-        context: Context,
-        label: String?,
-        text: String?,
-        toastMessageRes: Int = R.string.wallet_global_text_copied
+        context: Context, label: String?, text: String?, toastMessageRes: Int = R.string.wallet_global_text_copied
     ) {
-        val manager: ClipboardManager? =
-            context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager?
+        val manager: ClipboardManager? = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager?
         val clipData = ClipData.newPlainText(label, text)
         manager?.setPrimaryClip(clipData)
         showToast(context, toastMessageRes)
@@ -117,10 +115,7 @@ object Helper {
     }
 
     fun openEmailApp(
-        context: Context?,
-        email: String?,
-        subject: String? = EMPTY_STRING,
-        body: String? = EMPTY_STRING
+        context: Context?, email: String?, subject: String? = EMPTY_STRING, body: String? = EMPTY_STRING
     ) {
         if (email.isNullOrBlank()) return
         val emailIntent = Intent(Intent.ACTION_SEND)

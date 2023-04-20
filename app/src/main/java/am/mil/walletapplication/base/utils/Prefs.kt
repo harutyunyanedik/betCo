@@ -18,25 +18,14 @@ object Prefs {
     fun initPrefs(context: Context, prefsName: String) {
         val masterKeyAlias = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val spec = KeyGenParameterSpec.Builder(
-                MasterKey.DEFAULT_MASTER_KEY_ALIAS,
-                KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
-            )
-                .setBlockModes(KeyProperties.BLOCK_MODE_GCM)
-                .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
-                .setKeySize(MasterKey.DEFAULT_AES_GCM_MASTER_KEY_SIZE)
-                .build()
+                MasterKey.DEFAULT_MASTER_KEY_ALIAS, KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
+            ).setBlockModes(KeyProperties.BLOCK_MODE_GCM).setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE).setKeySize(MasterKey.DEFAULT_AES_GCM_MASTER_KEY_SIZE).build()
             MasterKey.Builder(context).setKeyGenParameterSpec(spec).build()
         } else {
-            MasterKey.Builder(context, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
-                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-                .build()
+            MasterKey.Builder(context, MasterKey.DEFAULT_MASTER_KEY_ALIAS).setKeyScheme(MasterKey.KeyScheme.AES256_GCM).build()
         }
         mPrefs = EncryptedSharedPreferences.create(
-            context,
-            prefsName,
-            masterKeyAlias,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            context, prefsName, masterKeyAlias, EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV, EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
     }
 
@@ -166,8 +155,7 @@ object Prefs {
     fun getDouble(key: String?, defValue: Double): Double {
         return java.lang.Double.longBitsToDouble(
             preferences!!.getLong(
-                key,
-                java.lang.Double.doubleToLongBits(defValue)
+                key, java.lang.Double.doubleToLongBits(defValue)
             )
         )
     }
@@ -184,8 +172,7 @@ object Prefs {
     fun getDouble(key: String?): Double {
         return java.lang.Double.longBitsToDouble(
             preferences!!.getLong(
-                key,
-                java.lang.Double.doubleToLongBits(0.0)
+                key, java.lang.Double.doubleToLongBits(0.0)
             )
         )
     }

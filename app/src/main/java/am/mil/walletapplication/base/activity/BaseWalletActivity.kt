@@ -43,20 +43,13 @@ abstract class BaseWalletActivity : AppCompatActivity() {
         loaderImageSrc()?.let {
             Glide.with(this).load(it).addListener(object : RequestListener<Drawable> {
                 override fun onLoadFailed(
-                    e: GlideException?,
-                    model: Any?,
-                    target: Target<Drawable>?,
-                    isFirstResource: Boolean
+                    e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean
                 ): Boolean {
                     return false
                 }
 
                 override fun onResourceReady(
-                    resource: Drawable?,
-                    model: Any?,
-                    target: Target<Drawable>?,
-                    dataSource: DataSource?,
-                    isFirstResource: Boolean
+                    resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean
                 ): Boolean {
                     binding.loaderProgressBar.isVisible = false
                     binding.loaderImageView.isVisible = true
@@ -88,8 +81,7 @@ abstract class BaseWalletActivity : AppCompatActivity() {
         isShowLoadingLiveData.observe(this) {
             if (it?.isNotEmpty() == true) {
                 Handler(Looper.getMainLooper()).postDelayed(
-                    { if (it.isNotEmpty()) showLoadingDialog() },
-                    500
+                    { if (it.isNotEmpty()) showLoadingDialog() }, 500
                 )
             } else {
                 dismissLoadingDialog()
@@ -245,8 +237,7 @@ abstract class BaseWalletActivity : AppCompatActivity() {
             confirmationMessageDialog = null
         }
 
-        confirmationMessageDialog =
-            createWalletMessageDialog(successMessageData, isShowCancelButton = true)
+        confirmationMessageDialog = createWalletMessageDialog(successMessageData, isShowCancelButton = true)
 
         if (!isDestroyed && !isFinishing) {
             confirmationMessageDialog!!.show()
@@ -260,18 +251,13 @@ abstract class BaseWalletActivity : AppCompatActivity() {
 
         val isShowLoadingLiveData: MutableLiveData<Stack<Unit>?> = MutableLiveData()
 
-        val isShowErrorMessageLiveData: SingleLiveEventData<Stack<WalletDefaultDialogData>?> =
-            SingleLiveEventData()
-        val isShowSuccessMessageLiveData: SingleLiveEventData<Stack<WalletDefaultDialogData>?> =
-            SingleLiveEventData()
-        val isShowInfoMessageLiveData: SingleLiveEventData<Stack<WalletDefaultDialogData>?> =
-            SingleLiveEventData()
-        val isShowConfirmationMessageLiveData: SingleLiveEventData<Stack<WalletDefaultDialogData>?> =
-            SingleLiveEventData()
+        val isShowErrorMessageLiveData: SingleLiveEventData<Stack<WalletDefaultDialogData>?> = SingleLiveEventData()
+        val isShowSuccessMessageLiveData: SingleLiveEventData<Stack<WalletDefaultDialogData>?> = SingleLiveEventData()
+        val isShowInfoMessageLiveData: SingleLiveEventData<Stack<WalletDefaultDialogData>?> = SingleLiveEventData()
+        val isShowConfirmationMessageLiveData: SingleLiveEventData<Stack<WalletDefaultDialogData>?> = SingleLiveEventData()
 
         fun addLoader() {
-            if (isShowLoadingLiveData.value == null)
-                isShowLoadingLiveData.value = Stack()
+            if (isShowLoadingLiveData.value == null) isShowLoadingLiveData.value = Stack()
 
             val loadersStack = isShowLoadingLiveData.value
             loadersStack!!.push(Unit)
@@ -287,26 +273,17 @@ abstract class BaseWalletActivity : AppCompatActivity() {
         }
 
         fun showErrorMessageDialog(
-            title: String,
-            message: String,
-            iconRes: Int = R.drawable.ic_warning,
-            isCancelable: Boolean
+            title: String, message: String, iconRes: Int = R.drawable.ic_warning, isCancelable: Boolean
         ) {
             showErrorMessageDialog(
                 WalletDefaultDialogData(
-                    title,
-                    message,
-                    iconRes,
-                    isCancelable,
-                    positiveButtonText = context.getString(android.R.string.ok),
-                    negativeButtonText = context.getString(android.R.string.cancel)
+                    title, message, iconRes, isCancelable, positiveButtonText = context.getString(android.R.string.ok), negativeButtonText = context.getString(android.R.string.cancel)
                 )
             )
         }
 
         fun showErrorMessageDialog(errorMessageData: WalletDefaultDialogData) {
-            if (isShowErrorMessageLiveData.value == null)
-                isShowErrorMessageLiveData.value = Stack()
+            if (isShowErrorMessageLiveData.value == null) isShowErrorMessageLiveData.value = Stack()
 
             val errorMessageStack = isShowErrorMessageLiveData.value
             errorMessageStack!!.push(errorMessageData)
@@ -314,26 +291,17 @@ abstract class BaseWalletActivity : AppCompatActivity() {
         }
 
         fun showSuccessMessageDialog(
-            title: String,
-            message: String,
-            iconRes: Int = R.drawable.ic_success,
-            isCancelable: Boolean = true
+            title: String, message: String, iconRes: Int = R.drawable.ic_success, isCancelable: Boolean = true
         ) {
             showSuccessMessageDialog(
                 WalletDefaultDialogData(
-                    title,
-                    message,
-                    iconRes,
-                    isCancelable,
-                    positiveButtonText = context.getString(android.R.string.ok),
-                    negativeButtonText = context.getString(android.R.string.cancel)
+                    title, message, iconRes, isCancelable, positiveButtonText = context.getString(android.R.string.ok), negativeButtonText = context.getString(android.R.string.cancel)
                 )
             )
         }
 
         fun showSuccessMessageDialog(successMessageData: WalletDefaultDialogData) {
-            if (isShowSuccessMessageLiveData.value == null)
-                isShowSuccessMessageLiveData.value = Stack()
+            if (isShowSuccessMessageLiveData.value == null) isShowSuccessMessageLiveData.value = Stack()
 
             val successMessageStack = isShowSuccessMessageLiveData.value
             successMessageStack!!.push(successMessageData)
@@ -341,26 +309,17 @@ abstract class BaseWalletActivity : AppCompatActivity() {
         }
 
         fun showInfoMessageDialog(
-            title: String,
-            message: String,
-            iconRes: Int = R.drawable.ic_info,
-            isCancelable: Boolean = true
+            title: String, message: String, iconRes: Int = R.drawable.ic_info, isCancelable: Boolean = true
         ) {
             showInfoMessageDialog(
                 WalletDefaultDialogData(
-                    title,
-                    message,
-                    iconRes,
-                    isCancelable,
-                    positiveButtonText = context.getString(android.R.string.ok),
-                    negativeButtonText = context.getString(android.R.string.cancel)
+                    title, message, iconRes, isCancelable, positiveButtonText = context.getString(android.R.string.ok), negativeButtonText = context.getString(android.R.string.cancel)
                 )
             )
         }
 
         fun showInfoMessageDialog(infoMessageData: WalletDefaultDialogData) {
-            if (isShowInfoMessageLiveData.value == null)
-                isShowInfoMessageLiveData.value = Stack()
+            if (isShowInfoMessageLiveData.value == null) isShowInfoMessageLiveData.value = Stack()
 
             val infoMessageStack = isShowInfoMessageLiveData.value
             infoMessageStack!!.push(infoMessageData)
@@ -368,30 +327,17 @@ abstract class BaseWalletActivity : AppCompatActivity() {
         }
 
         fun showConfirmationMessageDialog(
-            title: String,
-            message: String,
-            iconRes: Int = R.drawable.ic_confirmation,
-            isCancelable: Boolean = true,
-            okClick: () -> Unit = {},
-            cancelClick: () -> Unit = {}
+            title: String, message: String, iconRes: Int = R.drawable.ic_confirmation, isCancelable: Boolean = true, okClick: () -> Unit = {}, cancelClick: () -> Unit = {}
         ) {
             showConfirmationMessageDialog(
                 WalletDefaultDialogData(
-                    title,
-                    message,
-                    iconRes,
-                    isCancelable,
-                    okClick = okClick,
-                    cancelClick = cancelClick,
-                    positiveButtonText = context.getString(android.R.string.ok),
-                    negativeButtonText = context.getString(android.R.string.cancel)
+                    title, message, iconRes, isCancelable, okClick = okClick, cancelClick = cancelClick, positiveButtonText = context.getString(android.R.string.ok), negativeButtonText = context.getString(android.R.string.cancel)
                 )
             )
         }
 
         fun showConfirmationMessageDialog(infoMessageData: WalletDefaultDialogData) {
-            if (isShowConfirmationMessageLiveData.value == null)
-                isShowConfirmationMessageLiveData.value = Stack()
+            if (isShowConfirmationMessageLiveData.value == null) isShowConfirmationMessageLiveData.value = Stack()
 
             val infoMessageStack = isShowConfirmationMessageLiveData.value
             infoMessageStack!!.push(infoMessageData)

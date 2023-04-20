@@ -24,12 +24,11 @@ class HomeMainTabFragment : BaseWalletFragment() {
     private var binding: FragmentHomeMainTabBinding by viewLifecycle()
     private val viewModel by viewModel<HomeMainTabViewModel>()
     private val categoryAdapter: CategoryAdapter = CategoryAdapter {
-        if (!it.childCategoryItems.isNullOrEmpty())
-            findNavController().navigate(
-                HomeMainTabFragmentDirections.actionGlobalCategoryFragment(
-                    it
-                )
+        if (!it.childCategoryItems.isNullOrEmpty()) findNavController().navigate(
+            HomeMainTabFragmentDirections.actionGlobalCategoryFragment(
+                it
             )
+        )
     }
     private val promotionAdapter: HomePromotionAdapter = HomePromotionAdapter {
         Toast.makeText(requireContext(), "it", Toast.LENGTH_SHORT).show()
@@ -43,9 +42,7 @@ class HomeMainTabFragment : BaseWalletFragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeMainTabBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = viewLifecycleOwner
@@ -66,14 +63,11 @@ class HomeMainTabFragment : BaseWalletFragment() {
             adapter = categoryAdapter
             layoutManager = GridLayoutManager(requireContext(), 3)
         }
-        binding.balanceTextView.transformationMethod =
-            if (WalletPreferencesManager.isShowBalance()) null else PasswordTransformationMethod()
-        val imageResId =
-            if (WalletPreferencesManager.isShowBalance()) R.drawable.ic_password_hide else R.drawable.ic_password_show
+        binding.balanceTextView.transformationMethod = if (WalletPreferencesManager.isShowBalance()) null else PasswordTransformationMethod()
+        val imageResId = if (WalletPreferencesManager.isShowBalance()) R.drawable.ic_password_hide else R.drawable.ic_password_show
         binding.showHidePasswordImageView.setImageDrawable(
             ContextCompat.getDrawable(
-                requireContext(),
-                imageResId
+                requireContext(), imageResId
             )
         )
         binding.promotionRecyclerView.adapter = promotionAdapter
@@ -81,14 +75,11 @@ class HomeMainTabFragment : BaseWalletFragment() {
 
     private fun setupListeners() {
         binding.showHidePasswordImageView.setOnClickListener {
-            binding.balanceTextView.transformationMethod =
-                if (WalletPreferencesManager.isShowBalance()) PasswordTransformationMethod() else null
-            val imageResId =
-                if (WalletPreferencesManager.isShowBalance()) R.drawable.ic_password_show else R.drawable.ic_password_hide
+            binding.balanceTextView.transformationMethod = if (WalletPreferencesManager.isShowBalance()) PasswordTransformationMethod() else null
+            val imageResId = if (WalletPreferencesManager.isShowBalance()) R.drawable.ic_password_show else R.drawable.ic_password_hide
             binding.showHidePasswordImageView.setImageDrawable(
                 ContextCompat.getDrawable(
-                    requireContext(),
-                    imageResId
+                    requireContext(), imageResId
                 )
             )
             WalletPreferencesManager.putIsShowBalance(!WalletPreferencesManager.isShowBalance())
@@ -103,8 +94,7 @@ class HomeMainTabFragment : BaseWalletFragment() {
 
         viewModel.balanceLiveData.observe(viewLifecycleOwner) {
             binding.showHidePasswordImageView.isVisible = it.balance != null
-            binding.balanceTextView.text =
-                listOf(it.balance, it.currency).joinToString(STRING_SPACE)
+            binding.balanceTextView.text = listOf(it.balance, it.currency).joinToString(STRING_SPACE)
         }
     }
 }

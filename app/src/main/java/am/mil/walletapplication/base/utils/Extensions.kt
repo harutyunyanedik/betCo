@@ -41,30 +41,29 @@ import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
 @Suppress("unused")
-fun <T> AppCompatActivity.viewLifecycle(onDestroyView: (() -> Unit)? = null): ReadWriteProperty<Activity, T> =
-    object : ReadWriteProperty<Activity, T>, LifecycleObserver {
+fun <T> AppCompatActivity.viewLifecycle(onDestroyView: (() -> Unit)? = null): ReadWriteProperty<Activity, T> = object : ReadWriteProperty<Activity, T>, LifecycleObserver {
 
-        private var value: T? = null
+    private var value: T? = null
 
-        init {
-            this@viewLifecycle.lifecycle.addObserver(this)
-        }
-
-        @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-        fun onDestroy() {
-            onDestroyView?.invoke()
-            value = null
-        }
-
-        override fun getValue(thisRef: Activity, property: KProperty<*>): T {
-            return value ?: error("Called before onCreate or after onDestroy.")
-        }
-
-        override fun setValue(thisRef: Activity, property: KProperty<*>, value: T) {
-            this.value = value
-        }
-
+    init {
+        this@viewLifecycle.lifecycle.addObserver(this)
     }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    fun onDestroy() {
+        onDestroyView?.invoke()
+        value = null
+    }
+
+    override fun getValue(thisRef: Activity, property: KProperty<*>): T {
+        return value ?: error("Called before onCreate or after onDestroy.")
+    }
+
+    override fun setValue(thisRef: Activity, property: KProperty<*>, value: T) {
+        this.value = value
+    }
+
+}
 
 
 /**
@@ -77,34 +76,31 @@ fun <T> AppCompatActivity.viewLifecycle(onDestroyView: (() -> Unit)? = null): Re
  *                               or after onDestroyView an exception is thrown.
  * @sample 'private var binding: TheViewBinding by viewLifecycle()'
  */
-fun <T> Fragment.viewLifecycle(onDestroyView: (() -> Unit)? = null): ReadWriteProperty<Fragment, T> =
-    object : ReadWriteProperty<Fragment, T>, LifecycleObserver {
+fun <T> Fragment.viewLifecycle(onDestroyView: (() -> Unit)? = null): ReadWriteProperty<Fragment, T> = object : ReadWriteProperty<Fragment, T>, LifecycleObserver {
 
-        private var binding: T? = null
+    private var binding: T? = null
 
-        init {
-            this@viewLifecycle
-                .viewLifecycleOwnerLiveData
-                .observe(this@viewLifecycle) { owner: LifecycleOwner? ->
-                    owner?.lifecycle?.addObserver(this)
-                }
+    init {
+        this@viewLifecycle.viewLifecycleOwnerLiveData.observe(this@viewLifecycle) { owner: LifecycleOwner? ->
+            owner?.lifecycle?.addObserver(this)
         }
-
-        @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-        fun onDestroy() {
-            onDestroyView?.invoke()
-            binding = null
-        }
-
-        override fun getValue(thisRef: Fragment, property: KProperty<*>): T {
-            return binding ?: error("Called before onCreateView or after onDestroyView.")
-        }
-
-        override fun setValue(thisRef: Fragment, property: KProperty<*>, value: T) {
-            this.binding = value
-        }
-
     }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    fun onDestroy() {
+        onDestroyView?.invoke()
+        binding = null
+    }
+
+    override fun getValue(thisRef: Fragment, property: KProperty<*>): T {
+        return binding ?: error("Called before onCreateView or after onDestroyView.")
+    }
+
+    override fun setValue(thisRef: Fragment, property: KProperty<*>, value: T) {
+        this.binding = value
+    }
+
+}
 
 fun View.unbindDrawables() {
     try {
@@ -136,16 +132,14 @@ fun <T : View> ViewGroup.getViewsByType(tClass: Class<T>): List<T> {
             (child as? ViewGroup)?.let {
                 addAll(child.getViewsByType(tClass))
             }
-            if (tClass.isInstance(child))
-                add(tClass.cast(child))
+            if (tClass.isInstance(child)) add(tClass.cast(child))
         }
     }.filterNotNull()
 }
 
-inline fun <T : Fragment> T.withArgs(argsBuilder: Bundle.() -> Unit): T =
-    this.apply {
-        arguments = Bundle().apply(argsBuilder)
-    }
+inline fun <T : Fragment> T.withArgs(argsBuilder: Bundle.() -> Unit): T = this.apply {
+    arguments = Bundle().apply(argsBuilder)
+}
 
 fun Activity.clearFocus() {
     window?.decorView?.findViewById<View?>(android.R.id.content)?.clearFocus()
@@ -155,8 +149,7 @@ fun Activity.clearFocus() {
  * Changes size of dialog to adjust it when keyboard is open
  */
 fun Dialog.setPeekHeight() {
-    val bottomSheet =
-        this.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet) as FrameLayout?
+    val bottomSheet = this.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet) as FrameLayout?
     val behavior = BottomSheetBehavior.from(bottomSheet!!)
 
     val displayMetrics = this.ownerActivity!!.resources.displayMetrics
@@ -177,8 +170,7 @@ fun Context.makePhoneCall(number: String): Boolean {
 }
 
 fun AppCompatActivity.requestAllPermissions(
-    permissionsArray: Array<String>,
-    requestCode: Int
+    permissionsArray: Array<String>, requestCode: Int
 ) {
     ActivityCompat.requestPermissions(this, permissionsArray, requestCode)
 }
@@ -203,12 +195,7 @@ fun <T> T.clone(): T {
 
 @Suppress("unused")
 fun TextView.setClickableText(
-    string: String?,
-    startIndex: Int = 0,
-    endIndex: Int = -1,
-    @ColorRes colorRes: Int? = null,
-    isPreventDoubleClick: Boolean = false,
-    onTextClick: (() -> Unit)? = null
+    string: String?, startIndex: Int = 0, endIndex: Int = -1, @ColorRes colorRes: Int? = null, isPreventDoubleClick: Boolean = false, onTextClick: (() -> Unit)? = null
 ) {
     val spannableString = SpannableString(string)
 
@@ -217,10 +204,7 @@ fun TextView.setClickableText(
     colorRes?.let {
         val color = ResourcesCompat.getColor(context.resources, colorRes, context.theme)
         spannableString.setSpan(
-            ForegroundColorSpan(color),
-            startIndex,
-            newEndIndex,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            ForegroundColorSpan(color), startIndex, newEndIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
     }
     onTextClick?.let {
@@ -233,8 +217,7 @@ fun TextView.setClickableText(
                     }
                     lastTimeClicked = SystemClock.elapsedRealtime()
                     onTextClick()
-                } else
-                    onTextClick()
+                } else onTextClick()
             }
 
             override fun updateDrawState(ds: TextPaint) {
@@ -242,10 +225,7 @@ fun TextView.setClickableText(
             }
         }
         spannableString.setSpan(
-            clickableSpan,
-            startIndex,
-            newEndIndex,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            clickableSpan, startIndex, newEndIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
         movementMethod = LinkMovementMethod.getInstance()
     }
@@ -281,8 +261,7 @@ fun ViewGroup.isAllEnabled(isEnabled: Boolean) {
 }
 
 @Suppress("unused")
-fun ViewPager2.doOnPageSelected(onPageSelected: (position: Int) -> Unit) =
-    registerOnPageChangeCallback(onPageSelected = onPageSelected)
+fun ViewPager2.doOnPageSelected(onPageSelected: (position: Int) -> Unit) = registerOnPageChangeCallback(onPageSelected = onPageSelected)
 
 inline fun ViewPager2.registerOnPageChangeCallback(
     crossinline onPageScrolled: (
@@ -297,11 +276,8 @@ inline fun ViewPager2.registerOnPageChangeCallback(
     val onPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
 
         override fun onPageScrolled(
-            position: Int,
-            positionOffset: Float,
-            positionOffsetPixels: Int
-        ) =
-            onPageScrolled.invoke(position, positionOffset, positionOffsetPixels)
+            position: Int, positionOffset: Float, positionOffsetPixels: Int
+        ) = onPageScrolled.invoke(position, positionOffset, positionOffsetPixels)
 
         override fun onPageSelected(position: Int) = onPageSelected.invoke(position)
 

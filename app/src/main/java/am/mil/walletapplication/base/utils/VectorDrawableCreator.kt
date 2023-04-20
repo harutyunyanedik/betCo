@@ -16,24 +16,11 @@ import java.nio.charset.StandardCharsets
 object VectorDrawableCreator {
 
     private val BIN_XML_STRINGS = arrayOf(
-        "width".toByteArray(),
-        "height".toByteArray(),
-        "viewportWidth".toByteArray(),
-        "viewportHeight".toByteArray(),
-        "fillColor".toByteArray(),
-        "pathData".toByteArray(),
-        "path".toByteArray(),
-        "vector".toByteArray(),
-        "http://schemas.android.com/apk/res/android".toByteArray()
+        "width".toByteArray(), "height".toByteArray(), "viewportWidth".toByteArray(), "viewportHeight".toByteArray(), "fillColor".toByteArray(), "pathData".toByteArray(), "path".toByteArray(), "vector".toByteArray(), "http://schemas.android.com/apk/res/android".toByteArray()
     )
 
     private val BIN_XML_ATTRS = intArrayOf(
-        android.R.attr.height,
-        android.R.attr.width,
-        android.R.attr.viewportWidth,
-        android.R.attr.viewportHeight,
-        android.R.attr.fillColor,
-        android.R.attr.pathData
+        android.R.attr.height, android.R.attr.width, android.R.attr.viewportWidth, android.R.attr.viewportHeight, android.R.attr.fillColor, android.R.attr.pathData
     )
     private const val CHUNK_TYPE_XML: Short = 0x0003
     private const val CHUNK_TYPE_STR_POOL: Short = 0x0001
@@ -56,10 +43,7 @@ object VectorDrawableCreator {
      */
     @SuppressLint("DiscouragedPrivateApi")
     fun getVectorDrawable(
-        context: Context,
-        width: Int, height: Int,
-        paths: List<PathData>,
-        viewportWidth: Float = width.toFloat(), viewportHeight: Float = height.toFloat()
+        context: Context, width: Int, height: Int, paths: List<PathData>, viewportWidth: Float = width.toFloat(), viewportHeight: Float = height.toFloat()
     ): Drawable? {
         val binXml = createBinaryDrawableXml(width, height, viewportWidth, viewportHeight, paths)
         try {
@@ -91,9 +75,7 @@ object VectorDrawableCreator {
     }
 
     private fun createBinaryDrawableXml(
-        width: Int, height: Int,
-        viewportWidth: Float, viewportHeight: Float,
-        paths: List<PathData>
+        width: Int, height: Int, viewportWidth: Float, viewportHeight: Float, paths: List<PathData>
     ): ByteArray {
         val stringPool: MutableList<ByteArray> = ArrayList(listOf(*BIN_XML_STRINGS))
         for (path in paths) {
@@ -257,8 +239,7 @@ object VectorDrawableCreator {
     }
 
     private fun putAttribute(
-        bb: ByteBuffer, name: Int,
-        rawValue: Int, valueType: Short, valueData: Int
+        bb: ByteBuffer, name: Int, rawValue: Int, valueType: Short, valueData: Int
     ) {
         // https://justanapplication.wordpress.com/2011/09/19/android-internals-resources-part-eight-resource-entries-and-values/#struct_Res_value
         bb.putInt(8) // Namespace index in string pool (always the android namespace)
@@ -271,8 +252,7 @@ object VectorDrawableCreator {
 
     class PathData(var data: ByteArray, var color: Int) {
         constructor(data: String, color: Int) : this(
-            data.toByteArray(StandardCharsets.UTF_8),
-            color
+            data.toByteArray(StandardCharsets.UTF_8), color
         )
     }
 }

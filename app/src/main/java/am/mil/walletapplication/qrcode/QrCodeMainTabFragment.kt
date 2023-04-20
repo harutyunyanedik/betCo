@@ -18,15 +18,12 @@ class QrCodeMainTabFragment : Fragment() {
         if (result.contents == null) {
             Toast.makeText(requireContext(), "Cancelled", Toast.LENGTH_LONG).show()
         } else {
-            Toast.makeText(requireContext(), "Scanned: " + result.contents, Toast.LENGTH_LONG)
-                .show()
+            Toast.makeText(requireContext(), "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
         }
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentQrCodeMainTabBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = viewLifecycleOwner

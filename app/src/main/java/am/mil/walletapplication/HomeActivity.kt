@@ -30,8 +30,7 @@ class HomeActivity : BaseWalletActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Utils.changeStatusBarColor(
-            activity = this,
-            color = ContextCompat.getColor(this, R.color.status_bar_color)
+            activity = this, color = ContextCompat.getColor(this, R.color.status_bar_color)
         )
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
@@ -46,8 +45,7 @@ class HomeActivity : BaseWalletActivity() {
 
     private fun setupViews() {
         binding?.bottomNavigationView?.menu?.children?.forEachIndexed { index, menuItem ->
-            menuItem.title =
-                resources.getStringArray(R.array.navigationMenu_titles_ResIds_Array)[index]
+            menuItem.title = resources.getStringArray(R.array.navigationMenu_titles_ResIds_Array)[index]
         }
     }
 
@@ -59,18 +57,11 @@ class HomeActivity : BaseWalletActivity() {
         binding?.bottomNavigationView?.itemIconTintList = null
 
         val navGraphIds = listOf(
-            R.navigation.nav_graph_home,
-            R.navigation.nav_graph_history,
-            R.navigation.nav_graph_scanner,
-            R.navigation.nav_graph_cards,
-            R.navigation.nav_graph_account
+            R.navigation.nav_graph_home, R.navigation.nav_graph_history, R.navigation.nav_graph_scanner, R.navigation.nav_graph_cards, R.navigation.nav_graph_account
         )
 
         val controller = binding?.bottomNavigationView?.setupWithNavController(
-            navGraphIds = navGraphIds,
-            fragmentManager = supportFragmentManager,
-            containerId = R.id.nav_host_container,
-            intent = intent
+            navGraphIds = navGraphIds, fragmentManager = supportFragmentManager, containerId = R.id.nav_host_container, intent = intent
         )
 
         currentNavController = controller
@@ -78,24 +69,19 @@ class HomeActivity : BaseWalletActivity() {
         controller?.observe(this) { navController ->
             when (navController.graph.startDestinationId) {
                 R.id.homeFakeFragment -> setConditionalStartDestination(
-                    navController,
-                    R.id.homeFragment
+                    navController, R.id.homeFragment
                 )
                 R.id.historyFakeFragment -> setConditionalStartDestination(
-                    navController,
-                    R.id.historyFragment
+                    navController, R.id.historyFragment
                 )
                 R.id.scannerFakeFragment -> setConditionalStartDestination(
-                    navController,
-                    R.id.scannerFragment
+                    navController, R.id.scannerFragment
                 )
                 R.id.cardsFakeFragment -> setConditionalStartDestination(
-                    navController,
-                    R.id.cardsFragment
+                    navController, R.id.cardsFragment
                 )
                 R.id.accountFakeFragment -> setConditionalStartDestination(
-                    navController,
-                    R.id.accountFragment
+                    navController, R.id.accountFragment
                 )
             }
 
@@ -103,17 +89,14 @@ class HomeActivity : BaseWalletActivity() {
                 findPrimaryNavigationFragment()?.onStateInVisible()
                 navigationDestinationHandler.removeCallbacks(navigationDestinationRunnable)
                 navigationDestinationHandler.postDelayed(
-                    navigationDestinationRunnable,
-                    NAVIGATION_DESTINATION_DURATION
+                    navigationDestinationRunnable, NAVIGATION_DESTINATION_DURATION
                 )
             }
         }
     }
 
     private fun setConditionalStartDestination(
-        navController: NavController,
-        @IdRes startDestId: Int,
-        bundle: Bundle? = null
+        navController: NavController, @IdRes startDestId: Int, bundle: Bundle? = null
     ) {
         navController.navInflater.inflate(R.navigation.nav_graph_home_general).apply {
             setStartDestination(startDestId)
@@ -121,10 +104,9 @@ class HomeActivity : BaseWalletActivity() {
         }
     }
 
-    private fun findPrimaryNavigationFragment() =
-        supportFragmentManager.primaryNavigationFragment?.childFragmentManager?.fragments?.getOrNull(
-            0
-        ) as? BaseWalletFragment
+    private fun findPrimaryNavigationFragment() = supportFragmentManager.primaryNavigationFragment?.childFragmentManager?.fragments?.getOrNull(
+        0
+    ) as? BaseWalletFragment
 
     @Deprecated("deprecated")
     override fun onBackPressed() {

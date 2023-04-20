@@ -52,8 +52,6 @@ fun SpannableString.strike(start: Int?, end: Int?): SpannableString {
     return this
 }
 
-fun String.spannableColor(color: Int, spannableText: String): SpannableString =
-    SpannableString(this).color(color, this.length - spannableText.length, this.length)
+fun String.spannableColor(color: Int, spannableText: String): SpannableString = SpannableString(this).color(color, this.length - spannableText.length, this.length)
 
-fun String.spannableUnderline(start: Int?, end: Int?): SpannableString =
-    SpannableString(this).underline(start, end)
+fun String.spannableUnderline(start: Int?, end: Int?): SpannableString = SpannableString(this).underline(start, end)

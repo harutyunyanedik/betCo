@@ -1,6 +1,6 @@
 package am.mil.data
 
-import am.mil.data.category.mapper.HistoryMapper
+import am.mil.data.history.mapper.HistoryMapper
 import am.mil.data.net.history.HistoryDataSource
 import am.mil.domain.history.model.History
 import androidx.paging.PagingSource

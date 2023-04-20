@@ -27,8 +27,7 @@ fun Activity.createDialog(view: View, isCancelable: Boolean = true): Dialog? {
 }
 
 fun Activity.createWalletMessageDialog(
-    errorMessageData: WalletDefaultDialogData,
-    isShowCancelButton: Boolean = false
+    errorMessageData: WalletDefaultDialogData, isShowCancelButton: Boolean = false
 ): Dialog? {
     return createWalletMessageDialog(errorMessageData, this, isShowCancelButton)
 }
@@ -66,17 +65,14 @@ fun createDialog(view: View, isCancelable: Boolean, context: Context): Dialog? {
 }
 
 fun createWalletMessageDialog(
-    messageData: WalletDefaultDialogData,
-    context: Context,
-    isShowCancelButton: Boolean = false
+    messageData: WalletDefaultDialogData, context: Context, isShowCancelButton: Boolean = false
 ): Dialog {
-    val materialAlertDialog =
-        MaterialAlertDialogBuilder(context, R.style.BaseMaterialAlertDialogStyle).apply {
-            setTitle(messageData.title)
-            setMessage(messageData.message)
-            setCancelable(messageData.isCancelable)
-            messageData.iconRes?.let { setIcon(it) }
-        }
+    val materialAlertDialog = MaterialAlertDialogBuilder(context, R.style.BaseMaterialAlertDialogStyle).apply {
+        setTitle(messageData.title)
+        setMessage(messageData.message)
+        setCancelable(messageData.isCancelable)
+        messageData.iconRes?.let { setIcon(it) }
+    }
 
     materialAlertDialog.setPositiveButton(messageData.positiveButtonText) { dialogInterface, _ ->
         messageData.okClick()
@@ -96,22 +92,14 @@ fun createWalletMessageDialog(
 
 fun getLayoutParams(dialog: Dialog, context: Context): WindowManager.LayoutParams {
     val displayMetrics = getDeviceDisplayMetrics(context as Activity)
-    val dialogWidth =
-        if (displayMetrics.widthPixels <= displayMetrics.heightPixels) displayMetrics.widthPixels else displayMetrics.heightPixels
+    val dialogWidth = if (displayMetrics.widthPixels <= displayMetrics.heightPixels) displayMetrics.widthPixels else displayMetrics.heightPixels
     val layoutParams = WindowManager.LayoutParams()
     layoutParams.copyFrom(dialog.window?.attributes)
-    layoutParams.width =
-        dialogWidth - context.resources.getDimensionPixelSize(R.dimen.dialog_margin)
+    layoutParams.width = dialogWidth - context.resources.getDimensionPixelSize(R.dimen.dialog_margin)
     layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT
     return layoutParams
 }
 
 data class WalletDefaultDialogData(
-    var title: String = WalletConstants.EMPTY_STRING,
-    var message: String = WalletConstants.EMPTY_STRING,
-    @DrawableRes var iconRes: Int? = null,
-    var isCancelable: Boolean = true,
-    var positiveButtonText: String = WalletConstants.EMPTY_STRING,
-    var negativeButtonText: String = WalletConstants.EMPTY_STRING,
-    var okClick: () -> Unit = {}, var cancelClick: () -> Unit = {}
+    var title: String = WalletConstants.EMPTY_STRING, var message: String = WalletConstants.EMPTY_STRING, @DrawableRes var iconRes: Int? = null, var isCancelable: Boolean = true, var positiveButtonText: String = WalletConstants.EMPTY_STRING, var negativeButtonText: String = WalletConstants.EMPTY_STRING, var okClick: () -> Unit = {}, var cancelClick: () -> Unit = {}
 )

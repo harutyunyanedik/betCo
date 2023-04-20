@@ -13,16 +13,13 @@ import android.view.WindowManager
 object Utils {
 
     fun changeStatusBarColor(
-        isTranslucentStatusBar: Boolean = false,
-        color: Int = 0,
-        activity: Activity
+        isTranslucentStatusBar: Boolean = false, color: Int = 0, activity: Activity
     ) {
         if (isTranslucentStatusBar) {
             val window: Window = activity.window
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             window.setFlags(
-                WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
-                WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+                WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
             )
         } else {
             val window: Window = activity.window
@@ -42,10 +39,7 @@ object Utils {
 
     @SuppressLint("ResourceAsColor")
     fun createGradientDrawable(
-        shape: Int = GradientDrawable.RECTANGLE,
-        colorArgb: Int,
-        cornerRadius: Float = 0f,
-        gradientDrawableStroke: Boolean = false
+        shape: Int = GradientDrawable.RECTANGLE, colorArgb: Int, cornerRadius: Float = 0f, gradientDrawableStroke: Boolean = false
     ): GradientDrawable {
         val gradientDrawable = GradientDrawable()
         gradientDrawable.shape = shape
@@ -59,8 +53,7 @@ object Utils {
     }
 
     fun isPackageInstalled(
-        packageName: String,
-        packageManager: PackageManager
+        packageName: String, packageManager: PackageManager
     ): Boolean {
         var found = true
         try {

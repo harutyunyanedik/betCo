@@ -17,8 +17,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 
 class CategoryAdapter(
-    var itemViewType: CategoryItemViewTypeEnum = CategoryItemViewTypeEnum.GRID,
-    private val itemClick: (CategoryItem) -> Unit
+    var itemViewType: CategoryItemViewTypeEnum = CategoryItemViewTypeEnum.GRID, private val itemClick: (CategoryItem) -> Unit
 ) : RecyclerView.Adapter<CategoryAdapter.BaseViewHolder>() {
 
     private val items: MutableList<CategoryItem> = mutableListOf()
@@ -40,28 +39,22 @@ class CategoryAdapter(
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder =
-        when (viewType) {
-            CategoryItemViewTypeEnum.GRID.type -> CategoryGridViewHolder(
-                ItemCategoryGridBinding.inflate(
-                    layoutInflater,
-                    parent,
-                    false
-                )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder = when (viewType) {
+        CategoryItemViewTypeEnum.GRID.type -> CategoryGridViewHolder(
+            ItemCategoryGridBinding.inflate(
+                layoutInflater, parent, false
             )
-            else -> CategoryLinearViewHolder(
-                ItemCategoryLinearBinding.inflate(
-                    layoutInflater,
-                    parent,
-                    false
-                )
+        )
+        else -> CategoryLinearViewHolder(
+            ItemCategoryLinearBinding.inflate(
+                layoutInflater, parent, false
             )
-        }
+        )
+    }
 
     override fun getItemCount(): Int = items.size
 
-    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) =
-        holder.bind(items[position])
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) = holder.bind(items[position])
 
     abstract inner class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -78,10 +71,7 @@ class CategoryAdapter(
         open fun bind(item: CategoryItem) {
             item.svg?.let {
                 val d = VectorDrawableCreator.getVectorDrawable(
-                    context,
-                    24,
-                    24,
-                    listOf(VectorDrawableCreator.PathData(it, Color.parseColor(item.iconTint)))
+                    context, 24, 24, listOf(VectorDrawableCreator.PathData(it, Color.parseColor(item.iconTint)))
                 )
                 categoryImage.background = d
             }
@@ -90,15 +80,13 @@ class CategoryAdapter(
         }
     }
 
-    inner class CategoryGridViewHolder(binding: ItemCategoryGridBinding) :
-        BaseViewHolder(binding.root) {
+    inner class CategoryGridViewHolder(binding: ItemCategoryGridBinding) : BaseViewHolder(binding.root) {
         override val categoryCardView: CardView = binding.categoryCardView
         override val categoryImage: ImageView = binding.categoryImageView
         override val categoryTitle: TextView = binding.categoryNameTextView
     }
 
-    inner class CategoryLinearViewHolder(binding: ItemCategoryLinearBinding) :
-        BaseViewHolder(binding.root) {
+    inner class CategoryLinearViewHolder(binding: ItemCategoryLinearBinding) : BaseViewHolder(binding.root) {
         override val categoryCardView: CardView = binding.categoryCardView
         override val categoryImage: ImageView = binding.categoryImageView
         override val categoryTitle: TextView = binding.categoryNameTextView

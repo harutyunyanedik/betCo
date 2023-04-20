@@ -7,14 +7,15 @@
 
         <variable
             name="fragment"
-            type="am.mil.walletapplication.history.HistoryMainTabFragment" />
+            type="am.mil.walletapplication.history.TransactionHistoryDetailsFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/myWindowBackground"
-        tools:context=".history.HistoryMainTabFragment">
+        tools:context=".history.TransactionHistoryFragment">
+
         <View
             android:id="@+id/toolbarView"
             android:layout_width="match_parent"
@@ -37,33 +38,15 @@
             app:layout_constraintTop_toTopOf="@id/toolbarView"
             tools:ignore="HardcodedText" />
 
-
-        <ImageView
-            android:id="@+id/backButton"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:src="@drawable/ic_arrow_back"
-            app:layout_constraintBottom_toBottomOf="@id/toolbarView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/toolbarView"
-            tools:ignore="ContentDescription" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/historyRecyclerView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="16dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:text="History Details"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbarView"
-            tools:itemCount="15"
-            tools:listitem="@layout/item_history" />
-
-
+            app:layout_constraintTop_toBottomOf="@+id/toolbarView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>
-

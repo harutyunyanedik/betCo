@@ -11,18 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 
 class HistoryPagingAdapter(private val itemClick: (History.HistoryItem) -> Unit) :
 
-    PagingDataAdapter<History.HistoryItem,
-            HistoryPagingAdapter.HistoryViewHolder>(HistoryItemComparator) {
+    PagingDataAdapter<History.HistoryItem, HistoryPagingAdapter.HistoryViewHolder>(HistoryItemComparator) {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder =
-        HistoryViewHolder(
-            ItemHistoryBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder = HistoryViewHolder(
+        ItemHistoryBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
         getItem(position)?.let { historyItem ->
@@ -34,21 +27,16 @@ class HistoryPagingAdapter(private val itemClick: (History.HistoryItem) -> Unit)
         }
     }
 
-    inner class HistoryViewHolder(val binding: ItemHistoryBinding) :
-        RecyclerView.ViewHolder(binding.root)
+    inner class HistoryViewHolder(val binding: ItemHistoryBinding) : RecyclerView.ViewHolder(binding.root)
 
     object HistoryItemComparator : DiffUtil.ItemCallback<History.HistoryItem>() {
         override fun areItemsTheSame(
-            oldItem: History.HistoryItem,
-            newItem: History.HistoryItem
-        ): Boolean {
+            oldItem: History.HistoryItem, newItem: History.HistoryItem): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: History.HistoryItem,
-            newItem: History.HistoryItem
-        ): Boolean {
+            oldItem: History.HistoryItem, newItem: History.HistoryItem): Boolean {
             return oldItem == newItem
         }
     }

@@ -9,13 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HistoryMainTabFragment : BaseWalletFragment() {
 
     private var binding: FragmentHistoryMainTabBinding by viewLifecycle()
     private val viewModel by viewModel<HistoryMainTabViewModel>()
-    private val historyAdapter: HistoryPagingAdapter = HistoryPagingAdapter{
+    private val historyAdapter: HistoryPagingAdapter = HistoryPagingAdapter {
         findNavController().navigate(HistoryMainTabFragmentDirections.actionGlobalHistoryDetailsFragment())
     }
 
@@ -23,10 +24,9 @@ class HistoryMainTabFragment : BaseWalletFragment() {
         super.onCreate(savedInstanceState)
         viewModel.getHistories()
     }
+
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentHistoryMainTabBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = viewLifecycleOwner
@@ -43,20 +43,16 @@ class HistoryMainTabFragment : BaseWalletFragment() {
     }
 
     private fun setUpViews() {
-        binding.historyRecyclerView.apply {
-            adapter = historyAdapter
-        }
+        binding.historyRecyclerView.adapter = historyAdapter
     }
 
     private fun setUpListeners() {
-        binding.backButton.setOnClickListener {
 
-        }
     }
 
     private fun setUpObservers() {
         viewModel.historyItemsLiveData.observe(viewLifecycleOwner) {
-            lifecycleScope.launchWhenResumed {
+            lifecycleScope.launch {
                 historyAdapter.submitData(it)
             }
         }

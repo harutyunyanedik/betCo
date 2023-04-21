@@ -11,11 +11,9 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class HistoryMainTabViewModel(
-    private val getHistoryUseCase: GetTransactionsHistoryUseCase
-) : BaseObservableViewModel() {
+    private val getHistoryUseCase: GetTransactionsHistoryUseCase) : BaseObservableViewModel() {
 
-    private val _historyItemsLiveData: MutableLiveData<PagingData<History.HistoryItem>> =
-        MutableLiveData()
+    private val _historyItemsLiveData: MutableLiveData<PagingData<History.HistoryItem>> = MutableLiveData()
     val historyItemsLiveData: LiveData<PagingData<History.HistoryItem>>
         get() = _historyItemsLiveData
 
@@ -26,7 +24,7 @@ class HistoryMainTabViewModel(
                     _historyItemsLiveData.postValue(historyPagingDat)
                 }
             }
-            getHistoryUseCase().onError {  }
+            getHistoryUseCase().onError { }
         }
     }
 }

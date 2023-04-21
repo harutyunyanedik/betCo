@@ -5,7 +5,6 @@ import am.mil.data.base.createOkHttpClient
 import am.mil.data.base.createWebService
 import am.mil.data.net.categories.CategoriesDataSource
 import am.mil.data.net.categories.CategoriesSharedRepoImpl
-import am.mil.data.net.history.HistoryDataSource
 import am.mil.data.net.history.HistorySharedRepoImpl
 import am.mil.data.net.wallet.WalletDataSource
 import am.mil.data.net.wallet.balance.WalletSharedRepoImpl
@@ -26,8 +25,6 @@ internal val apiModule = module {
     single { createWebService<WalletDataSource>(createOkHttpClient(), WALLET_PAYMENTS_BASE_URL) }
 
     single<WalletSharedRepo> { WalletSharedRepoImpl(get()) }
-
-    single { createWebService<HistoryDataSource>(createOkHttpClient(), WALLET_PAYMENTS_BASE_URL) }
 
     single<HistorySharedRepo> { HistorySharedRepoImpl(get()) }
     single { HistoryPagingDataSource(get()) }

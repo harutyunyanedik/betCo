@@ -1,11 +1,11 @@
 package am.mil.data
 
 import am.mil.data.history.mapper.HistoryMapper
-import am.mil.data.net.history.HistoryDataSource
+import am.mil.data.net.wallet.WalletDataSource
 import am.mil.domain.history.model.History
 import androidx.paging.PagingSource
 
-class HistoryPagingDataSource(private val dataSource: HistoryDataSource) :
+class HistoryPagingDataSource(private val dataSource: WalletDataSource) :
     PagingSource<Int, History.HistoryItem>() {
     companion object {
         private const val PAGE_SIZE = 10
